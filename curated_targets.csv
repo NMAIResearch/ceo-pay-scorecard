@@ -1,0 +1,30 @@
+ticker,company,ceo,payout_vs_target,metric_type,company_tsr,peer_tsr,note
+TSLA,Tesla,Musk,milestone options,equity_milestone,891,209,2018 performance award; $0 salary/bonus; equity-only
+PLTR,Palantir,Karp,service-based equity,service_equity,754.78,258.38,time-vesting RSUs/SARs not gated on financial targets; $8.6M granted to $11.1B realized
+AVGO,Broadcom,Tan,$0 cash; price-hurdle PSU,annual_cash_bonus,1182.35,243.37,annual cash set to $0 through FY2027; front-loaded PSU tracking at max
+GOOGL,Alphabet,Pichai,200% (max),LTI_PSU_metric,360.95,138.27,PSUs vested at max: 3yr relative TSR 92.86th percentile vs S&P 100 - earned
+ORCL,Oracle,Catz,$0 cash bonus,annual_cash_bonus,231.5,172.38,cash-bonus formula not triggered; LTI performance-based; thin peer-relative TSR
+NVDA,Nvidia,Huang,150% (self-capped),LTI_PSU_metric,1445.67,198.10,committee self-capped CEO at 150% (others 200%); largest peer outperformance in the set
+AAPL,Apple,Cook,200% (max),annual_cash_bonus,233.88,279.51,annual cash paid at maximum on internal goals; 5yr TSR lagged the board's own peer group
+JPM,JPMorgan Chase,Dimon,discretionary,discretionary,289.18,203.21,committee-set on a performance assessment; record 2025 (ROTCE 20%)
+GE,GE Aerospace,Culp,0-200% AEIP; 2023 PSU 175%,not_extracted,586,189,annual bonus 0-200%; 2023 PSUs capped at max on strong results
+NFLX,Netflix,Sarandos/Peters,117.57%,annual_cash_bonus,173.4,138.27,co-CEOs; bonus ~117.57%; revenue exceeded target
+MSFT,Microsoft,Nadella,103.69%,annual_cash_bonus,255,276,above-target annual cash; 5yr TSR lagged peer group (-21) despite top-tier pay
+BKNG,Booking Holdings,Fogel,~162%,annual_cash_bonus,244.36,138.27,bonus ~162% of target; record bookings
+LLY,Eli Lilly,Ricks,218% (max 250%),annual_cash_bonus,670.56,154.11,bonus 218%; strong results; pay tracked delivery up
+AXP,American Express,Squeri,committee-set,discretionary,326,203,annual incentive committee-determined; record card-fee revenue
+AMT,American Tower,Vondran,2023 PSU 157%,not_extracted,90.61,126.71,hand-read from rendered proxy; 5yr TSR 90.61 below $100 = absolute loss (REIT); LTI half time-vested
+INTC,Intel,Lip-Bu Tan,AIP 118.7%,annual_cash_bonus,85.08,264.83,above-target bonus in a -$0.3B loss year; 5yr TSR 85.08 below $100 = absolute loss; new-CEO $161.6M CAP
+AMD,AMD,Su,EIP 121%,annual_cash_bonus,234,547,bonus 121%; semis peer index Nvidia-inflated so -313 gap is composition; vs S&P 500 roughly in line
+NOW,ServiceNow,McDermott,LTI 119.7%,LTI_PSU_metric,139,227,PRSU target achievement 119.7%; FY2025 CAP -$83M (re-marked down) vs $51.5M granted
+C,Citigroup,Fraser,discretionary (PSU 51.2% of shares),discretionary,226.34,203.47,committee-determined; 2022 PSUs earned 51.2% of target shares; beat peers +23
+WFC,Wells Fargo,Scharf,discretionary (cap 150%),discretionary,347,196,risk-adjusted discretionary; PSAs cap 150%; strongly beat peers +151
+UNH,UnitedHealth,Hemsley/Witty,LTI 0% (below threshold),LTI_PSU_metric,102,148,2023-25 LTI paid 0% in the crisis year - pay tracked delivery DOWN; cleanest such case
+BNY,BNY Mellon,Vince,PSU 147.5%,LTI_PSU_metric,315.84,203.47,PSUs earned 147.5% (cap 150%); pay tracked delivery up; beat peers +112
+TMO,Thermo Fisher,Casper,AIP 99.8%,annual_cash_bonus,126.05,156.63,near-target bonus while 5yr TSR lagged peers (-31)
+COF,Capital One,Fairbank,PSU 0-150% (% not surfaced),not_extracted,268.21,203.47,$0 cash salary; 100% at-risk equity; beat peers +65; Discover-acquisition year
+META,Meta,Zuckerberg,none (founder),none_founder,243.32,445.33,no equity no bonus; granted = CAP = $25.1M (mostly security); payout-vs-target undefined
+CRM,Salesforce,Benioff,held at 100%,annual_cash_bonus,94.12,256.61,committee declined an upward adjustment; CAP -$49M; 5yr TSR 94 below $100 = absolute loss
+ADBE,Adobe,Narayen,2023 PSP 83%,LTI_PSU_metric,67.11,187.96,LTI cut by a relative-TSR miss; sharpest absolute decline (TSR 67 below $100); CAP -$17M
+IBM,IBM,Krishna,AIP 150%,annual_cash_bonus,303,210,bonus 150%; turnaround; strongly beat peers +93; pay tracked delivery up
+GS,Goldman Sachs,Solomon,$80M retention (no condition),not_extracted,375,203,$80M RSU 5yr cliff with NO performance condition (Glass Lewis advised against); beat peers +172
