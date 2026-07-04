@@ -8,16 +8,23 @@ An interactive front-end to *The CEO Pay-vs-Delivery Scorecard*: a reproducible,
 
 ## What it does
 
-Toggle between **granted** pay (the Summary Compensation Table figure the press quotes) and **realized** pay (Compensation Actually Paid, the SEC measure that re-marks equity to the share price). The league table reorders completely — that reordering is the central finding. Sort any column, filter by company or CEO, and read each CEO's pay beside their peer-relative shareholder return.
+Two views, switched at the top:
 
-The page reads the frozen `scorecard_v0.csv` verbatim (embedded in the file), so it never goes stale and is not "live" — the canonical, citable version is the Zenodo DOI above.
+- **League table (98).** Toggle between **granted** pay (the Summary Compensation Table figure the press quotes) and **realized** pay (Compensation Actually Paid, the SEC measure that re-marks equity to the share price). The table reorders completely — that reordering is the central finding (F1).
+- **Board targets (29).** For 29 hand-curated companies, the board's *own* payout-versus-target beside peer-relative delivery (F4), with a column declaring what each payout measures so a cash-bonus % and a PSU-vesting % are never conflated.
+
+Sort any column, filter by company or CEO, and read pay beside peer-relative shareholder return.
+
+The page embeds the frozen `scorecard_v0.csv` and `curated_targets.csv` verbatim, so it never goes stale and is not "live" — the canonical, citable version is the Zenodo DOI above.
 
 ## Files
 
-- `index.html` — the interactive tool, self-contained (no dependencies, no build step).
-- `scorecard_v0.csv` — the frozen 98-company dataset the tool displays.
+- `index.html` — the interactive tool, self-contained (no dependencies, no server needed).
+- `scorecard_v0.csv` — the frozen 98-company league-table dataset.
+- `curated_targets.csv` — the 29-company board-target layer.
+- `build.py` — regenerates `index.html` by embedding the two CSVs (pure standard library). Edit a CSV, run `python3 build.py`, commit.
 
-The full reproducibility bundle — the EDGAR pull pipeline (`reproduce.py`, `assemble.py`), the 539-company-year spine (`pvp_pulled.csv`), and the hand-curated board-target layer — lives in the [Zenodo record](https://doi.org/10.5281/zenodo.20680109).
+The full reproducibility bundle — the EDGAR pull pipeline (`reproduce.py`, `assemble.py`), the 539-company-year spine (`pvp_pulled.csv`), and the complete curated layer — lives in the [Zenodo record](https://doi.org/10.5281/zenodo.20680109).
 
 ## Method (brief)
 

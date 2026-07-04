@@ -25,6 +25,7 @@
     border:1px solid var(--line);border-radius:8px}
   .ctl label{display:block;font-size:11.5px;text-transform:uppercase;letter-spacing:.04em;
     color:var(--slate);font-weight:bold;margin-bottom:6px}
+  .ctl.hide{display:none}
   .seg{display:inline-flex;border:1px solid var(--navy);border-radius:6px;overflow:hidden}
   .seg button{appearance:none;border:0;background:#fff;color:var(--navy);
     padding:8px 14px;font-size:13.5px;cursor:pointer;font-family:inherit}
@@ -50,12 +51,14 @@
   .tick{font-weight:bold;color:var(--navy)}
   .name{color:var(--slate);font-size:12px}
   .pay{font-weight:bold;font-variant-numeric:tabular-nums}
+  .payout{font-weight:bold;color:var(--navy)}
+  .metric{color:var(--slate);font-size:11.5px}
   .neg{color:var(--bad)}
   .badge{display:inline-block;padding:2px 7px;border-radius:11px;font-size:11.5px;
     font-weight:bold;font-variant-numeric:tabular-nums}
   .badge.up{color:var(--good);background:var(--goodbg)}
   .badge.down{color:var(--bad);background:var(--badbg)}
-  .note{color:var(--slate);font-size:11.5px}
+  .note{color:var(--slate);font-size:11.5px;max-width:380px;white-space:normal}
   .mut{color:#a0aec0}
 
   .foot{margin-top:30px;font-size:12px;color:var(--slate);border-top:1px solid var(--line);
@@ -75,13 +78,20 @@
 
   <div class="controls">
     <div class="ctl">
+      <label>View</label>
+      <div class="seg" id="view">
+        <button data-v="league" class="on">League table · 98</button>
+        <button data-v="curated">Board targets · 29</button>
+      </div>
+    </div>
+    <div class="ctl" id="ctl-basis">
       <label>Pay basis</label>
       <div class="seg" id="basis">
         <button data-v="granted" class="on">Granted (headline)</button>
         <button data-v="cap">Realized (CAP)</button>
       </div>
     </div>
-    <div class="ctl">
+    <div class="ctl" id="ctl-period">
       <label>Period</label>
       <div class="seg" id="period">
         <button data-v="latest" class="on">Latest fiscal year</button>
@@ -97,30 +107,21 @@
   <div class="spotlight" id="spot"></div>
 
   <table id="tbl">
-    <thead>
-      <tr>
-        <th class="num" data-k="rank" title="rank by the selected pay metric">#</th>
-        <th data-k="company">Company</th>
-        <th data-k="ceo">CEO</th>
-        <th class="num" data-k="pay" id="payhead">Pay</th>
-        <th class="num" data-k="tsr" title="company 5-yr TSR minus the board's own peer index, $100 base">Peer-relative TSR</th>
-        <th class="num" data-k="mult" title="realized (CAP) divided by granted pay, latest FY">Realized ÷ Granted</th>
-        <th data-k="flag">Note</th>
-      </tr>
-    </thead>
+    <thead><tr id="head"></tr></thead>
     <tbody id="rows"></tbody>
   </table>
   <p class="count" id="count"></p>
 
   <div class="foot">
-    <p><b>What the toggle shows.</b> <b>Granted</b> is the Summary Compensation Table figure the press quotes. <b>Realized (CAP)</b> is Compensation Actually Paid — the SEC measure that re-marks equity to the share price; it is an accounting fair value, not cash-in-pocket. Flip the toggle and the league table reorders: that reordering is the central finding (F1).</p>
-    <p><b>Peer-relative TSR</b> is the company's cumulative total shareholder return ($100 invested at the window start) minus the <em>board's own chosen peer index</em>. A lag can mean the benchmark ran hot, not that the company cratered — e.g. semiconductor peer indices inflated by Nvidia. Green = beat the chosen peers; red = lagged them.</p>
+    <p><b>League table.</b> <b>Granted</b> is the Summary Compensation Table figure the press quotes. <b>Realized (CAP)</b> is Compensation Actually Paid — the SEC measure that re-marks equity to the share price; an accounting fair value, not cash-in-pocket. Flip the basis and the table reorders: that reordering is the central finding (F1).</p>
+    <p><b>Board targets.</b> For 29 hand-curated companies, the board's <em>own</em> payout-versus-target set beside peer-relative delivery (F4). The <b>metric</b> column declares what each payout measures, because an annual-cash-bonus % and a PSU-vesting % are different things and must not be conflated (e.g. Apple's 200% is a cash bonus; Alphabet's 200% is PSU vesting). Two of the 29 (American Tower, Intel) were hand-read from rendered proxies and are not in the 98-company machine-readable spine.</p>
+    <p><b>Peer-relative TSR</b> is the company's cumulative total shareholder return ($100 invested at the window start) minus the <em>board's own chosen peer index</em>. A lag can mean the benchmark ran hot, not that the company cratered (semiconductor peer indices inflated by Nvidia). Green = beat the chosen peers; red = lagged them.</p>
     <details>
       <summary>Guardrails — read before citing</summary>
-      <p style="margin-top:10px"><b>Attribution:</b> TSR is not caused by the CEO (macro, sector, luck, predecessor). This is a co-incidence of pay and peer-relative return, not causation — never read it as "overpaid." <b>CAP caveat:</b> swings with the share price; not cash received. <b>Peer-group choice is the company's own</b> and drives the gap. <b>Sample:</b> this is the 98-company automated spine; the curated 29-company board-target layer lives in the paper. The population beat-rate is 46/96 ≈ a coin-flip — do not generalise from the high-pay extremes.</p>
+      <p style="margin-top:10px"><b>Attribution:</b> TSR is not caused by the CEO (macro, sector, luck, predecessor). This is a co-incidence of pay and peer-relative return, not causation — never read it as "overpaid." <b>CAP caveat:</b> swings with the share price; not cash received. <b>Peer-group choice is the company's own</b> and drives the gap. <b>Samples differ:</b> the league table is the 98-company automated spine (population beat-rate 46/96 ≈ a coin-flip); the 29 board-target companies are a non-random, high-pay sample — do not generalise from them.</p>
     </details>
     <p style="margin-top:12px"><b>Disclosure.</b> The author holds no direct position in any company named. A workplace defined-contribution pension may hold some indirectly through pooled funds, not directed by the author. No third party reviewed, funded, or directed this work.</p>
-    <p><b>Reproducibility.</b> Built free from SEC EDGAR DEF 14A Pay-versus-Performance disclosures (Item 402(v)); 98 companies, 539 company-years. <code>python3 reproduce.py universe.txt &amp;&amp; assemble.py</code> — pure Python standard library, no keys. This page reads the frozen <code>scorecard_v0.csv</code> verbatim; the canonical, citable version is the Zenodo DOI above.</p>
+    <p><b>Reproducibility.</b> Built free from SEC EDGAR DEF 14A Pay-versus-Performance disclosures (Item 402(v)); 98 companies, 539 company-years. This page embeds the frozen <code>scorecard_v0.csv</code> and <code>curated_targets.csv</code> verbatim (regenerated by <code>build.py</code>); the canonical, citable version is the Zenodo DOI above.</p>
   </div>
 </div>
 
@@ -145,8 +146,13 @@ const NAME = {
  TMUS:"T-Mobile",TSLA:"Tesla",TXN:"Texas Instruments",UBER:"Uber",UNH:"UnitedHealth",UNP:"Union Pacific",
  UPS:"UPS",USB:"U.S. Bancorp",V:"Visa",VZ:"Verizon",WFC:"Wells Fargo",WMT:"Walmart",XOM:"Exxon Mobil"
 };
+const METRIC = {
+ annual_cash_bonus:"annual cash bonus", LTI_PSU_metric:"LTI / PSU",
+ equity_milestone:"equity milestone", service_equity:"service equity",
+ discretionary:"discretionary", none_founder:"founder (none)", not_extracted:"not surfaced"
+};
 
-// ---- frozen data: scorecard_v0.csv, verbatim ----
+// ---- frozen data: regenerated from CSV by build.py ----
 const CSV = `ticker,latest_fy,latest_ceo,latest_granted_usd,latest_cap_usd,window_granted_usd,window_cap_usd,company_tsr_idx,peer_tsr_idx,tsr_vs_peer,beat_peers,cap_to_granted_x,flags
 TSLA,2023,,0,1403000000,0,49735000000,891,209,682.0,True,,EQUITY_ONLY_SCT_ZERO
 PLTR,2025,Mr. Karp,8623000,11094359597,26727584,16382762764,754.78,258.38,496.4,True,1286.6,
@@ -246,6 +252,36 @@ DHR,2025,Rainer Blair,23795280,17340170,104154020,89665494,119,148,-29.0,False,0
 BMY,2025,Dr. Chris Boerner,21879919,16862134,108628642,83105505,105,198,-93.0,False,0.77,CEO_TRANSITION
 UNP,2025,Mr. Vena,20296362,16803878,84360940,73502570,124,149,-25.0,False,0.83,CEO_TRANSITION
 BRK-B,2025,Warren E. Buffett,389488,389488,1982987,1982987,217.01,234.62,-17.6,False,1.0,`;
+const CURATED = `ticker,company,ceo,payout_vs_target,metric_type,company_tsr,peer_tsr,note
+TSLA,Tesla,Musk,milestone options,equity_milestone,891,209,2018 performance award; $0 salary/bonus; equity-only
+PLTR,Palantir,Karp,service-based equity,service_equity,754.78,258.38,time-vesting RSUs/SARs not gated on financial targets; $8.6M granted to $11.1B realized
+AVGO,Broadcom,Tan,$0 cash; price-hurdle PSU,annual_cash_bonus,1182.35,243.37,annual cash set to $0 through FY2027; front-loaded PSU tracking at max
+GOOGL,Alphabet,Pichai,200% (max),LTI_PSU_metric,360.95,138.27,PSUs vested at max: 3yr relative TSR 92.86th percentile vs S&P 100 - earned
+ORCL,Oracle,Catz,$0 cash bonus,annual_cash_bonus,231.5,172.38,cash-bonus formula not triggered; LTI performance-based; thin peer-relative TSR
+NVDA,Nvidia,Huang,150% (self-capped),LTI_PSU_metric,1445.67,198.10,committee self-capped CEO at 150% (others 200%); largest peer outperformance in the set
+AAPL,Apple,Cook,200% (max),annual_cash_bonus,233.88,279.51,annual cash paid at maximum on internal goals; 5yr TSR lagged the board's own peer group
+JPM,JPMorgan Chase,Dimon,discretionary,discretionary,289.18,203.21,committee-set on a performance assessment; record 2025 (ROTCE 20%)
+GE,GE Aerospace,Culp,0-200% AEIP; 2023 PSU 175%,not_extracted,586,189,annual bonus 0-200%; 2023 PSUs capped at max on strong results
+NFLX,Netflix,Sarandos/Peters,117.57%,annual_cash_bonus,173.4,138.27,co-CEOs; bonus ~117.57%; revenue exceeded target
+MSFT,Microsoft,Nadella,103.69%,annual_cash_bonus,255,276,above-target annual cash; 5yr TSR lagged peer group (-21) despite top-tier pay
+BKNG,Booking Holdings,Fogel,~162%,annual_cash_bonus,244.36,138.27,bonus ~162% of target; record bookings
+LLY,Eli Lilly,Ricks,218% (max 250%),annual_cash_bonus,670.56,154.11,bonus 218%; strong results; pay tracked delivery up
+AXP,American Express,Squeri,committee-set,discretionary,326,203,annual incentive committee-determined; record card-fee revenue
+AMT,American Tower,Vondran,2023 PSU 157%,not_extracted,90.61,126.71,hand-read from rendered proxy; 5yr TSR 90.61 below $100 = absolute loss (REIT); LTI half time-vested
+INTC,Intel,Lip-Bu Tan,AIP 118.7%,annual_cash_bonus,85.08,264.83,above-target bonus in a -$0.3B loss year; 5yr TSR 85.08 below $100 = absolute loss; new-CEO $161.6M CAP
+AMD,AMD,Su,EIP 121%,annual_cash_bonus,234,547,bonus 121%; semis peer index Nvidia-inflated so -313 gap is composition; vs S&P 500 roughly in line
+NOW,ServiceNow,McDermott,LTI 119.7%,LTI_PSU_metric,139,227,PRSU target achievement 119.7%; FY2025 CAP -$83M (re-marked down) vs $51.5M granted
+C,Citigroup,Fraser,discretionary (PSU 51.2% of shares),discretionary,226.34,203.47,committee-determined; 2022 PSUs earned 51.2% of target shares; beat peers +23
+WFC,Wells Fargo,Scharf,discretionary (cap 150%),discretionary,347,196,risk-adjusted discretionary; PSAs cap 150%; strongly beat peers +151
+UNH,UnitedHealth,Hemsley/Witty,LTI 0% (below threshold),LTI_PSU_metric,102,148,2023-25 LTI paid 0% in the crisis year - pay tracked delivery DOWN; cleanest such case
+BNY,BNY Mellon,Vince,PSU 147.5%,LTI_PSU_metric,315.84,203.47,PSUs earned 147.5% (cap 150%); pay tracked delivery up; beat peers +112
+TMO,Thermo Fisher,Casper,AIP 99.8%,annual_cash_bonus,126.05,156.63,near-target bonus while 5yr TSR lagged peers (-31)
+COF,Capital One,Fairbank,PSU 0-150% (% not surfaced),not_extracted,268.21,203.47,$0 cash salary; 100% at-risk equity; beat peers +65; Discover-acquisition year
+META,Meta,Zuckerberg,none (founder),none_founder,243.32,445.33,no equity no bonus; granted = CAP = $25.1M (mostly security); payout-vs-target undefined
+CRM,Salesforce,Benioff,held at 100%,annual_cash_bonus,94.12,256.61,committee declined an upward adjustment; CAP -$49M; 5yr TSR 94 below $100 = absolute loss
+ADBE,Adobe,Narayen,2023 PSP 83%,LTI_PSU_metric,67.11,187.96,LTI cut by a relative-TSR miss; sharpest absolute decline (TSR 67 below $100); CAP -$17M
+IBM,IBM,Krishna,AIP 150%,annual_cash_bonus,303,210,bonus 150%; turnaround; strongly beat peers +93; pay tracked delivery up
+GS,Goldman Sachs,Solomon,$80M retention (no condition),not_extracted,375,203,$80M RSU 5yr cliff with NO performance condition (Glass Lewis advised against); beat peers +172`;
 
 // ---- minimal CSV parser (handles quoted fields with commas) ----
 function parseCSV(text){
@@ -267,23 +303,31 @@ function parseCSV(text){
   if(field.length||row.length){ row.push(field); rows.push(row); }
   return rows;
 }
+function toObjects(text){
+  const raw=parseCSV(text); const head=raw[0];
+  return raw.slice(1).filter(r=>r.length>1).map(r=>{
+    const o={}; head.forEach((h,j)=> o[h]= r[j]===undefined?'':r[j]); return o;
+  });
+}
 
-const raw = parseCSV(CSV);
-const head = raw[0];
-const data = raw.slice(1).map(r=>{
-  const o={}; head.forEach((h,j)=> o[h]= r[j]===undefined?'':r[j]);
+// league rows
+const league = toObjects(CSV).map(o=>{
   const num=k=> o[k]===''? null : Number(o[k]);
-  return {
-    ticker:o.ticker, fy:o.latest_fy, ceo:o.latest_ceo,
+  return { ticker:o.ticker, fy:o.latest_fy, ceo:o.latest_ceo,
     lg:num('latest_granted_usd'), lc:num('latest_cap_usd'),
     wg:num('window_granted_usd'), wc:num('window_cap_usd'),
-    tsr:num('tsr_vs_peer'), beat:o.beat_peers,
-    mult:num('cap_to_granted_x'), flags:o.flags
-  };
+    tsr:num('tsr_vs_peer'), mult:num('cap_to_granted_x'), flags:o.flags };
+});
+// curated rows
+const curated = toObjects(CURATED).map(o=>{
+  const ct=Number(o.company_tsr), pt=Number(o.peer_tsr);
+  return { ticker:o.ticker, company:o.company, ceo:o.ceo,
+    payout:o.payout_vs_target, metric:o.metric_type,
+    tsr: (isFinite(ct)&&isFinite(pt))? Math.round(ct-pt) : null, note:o.note };
 });
 
 // ---- state ----
-let basis='granted', period='latest', sortK='pay', sortDir=-1, query='';
+let view='league', basis='granted', period='latest', sortK='pay', sortDir=-1, query='';
 
 function payOf(d){
   if(period==='latest') return basis==='granted'? d.lg : d.lc;
@@ -304,100 +348,142 @@ function fmtFlag(f){
   if(f==='CEO_TRANSITION') return '<span class="note">CEO transition</span>';
   return '<span class="note">'+f.toLowerCase().replace(/_/g,' ')+'</span>';
 }
+function tsrBadge(t){
+  if(t===null) return '<span class="mut">—</span>';
+  return '<span class="badge '+(t>=0?'up':'down')+'">'+(t>=0?'+':'−')+
+    Math.abs(t).toFixed(0)+(t>=0?' ▲':' ▼')+'</span>';
+}
 
-function compare(a,b){
+function arrow(k){ return (sortK===k)?(sortDir<0?'▼':'▲'):'↕'; }
+
+// ---- league view ----
+function compareLeague(a,b){
   let av,bv;
   if(sortK==='pay'){ av=payOf(a); bv=payOf(b); }
   else if(sortK==='tsr'){ av=a.tsr; bv=b.tsr; }
   else if(sortK==='mult'){ av=a.mult; bv=b.mult; }
-  else if(sortK==='company'){ av=(NAME[a.ticker]||a.ticker); bv=(NAME[b.ticker]||b.ticker); return av.localeCompare(bv)*sortDir; }
-  else if(sortK==='ceo'){ av=a.ceo||'~'; bv=b.ceo||'~'; return av.localeCompare(bv)*sortDir; }
-  else if(sortK==='flag'){ av=a.flags||'~'; bv=b.flags||'~'; return av.localeCompare(bv)*sortDir; }
+  else if(sortK==='company'){ return (NAME[a.ticker]||a.ticker).localeCompare(NAME[b.ticker]||b.ticker)*sortDir; }
+  else if(sortK==='ceo'){ return (a.ceo||'~').localeCompare(b.ceo||'~')*sortDir; }
+  else if(sortK==='flag'){ return (a.flags||'~').localeCompare(b.flags||'~')*sortDir; }
   else { av=payOf(a); bv=payOf(b); }
-  if(av===null) return 1; if(bv===null) return -1;       // nulls sink
+  if(av===null) return 1; if(bv===null) return -1;
   return (av-bv)*sortDir;
 }
-
-function render(){
-  // header label
-  const lab = (basis==='granted'?'Granted pay':'Realized pay (CAP)') +
-              (period==='latest'?' · latest FY':' · 5-yr');
-  document.getElementById('payhead').firstChild
-    ? document.getElementById('payhead').childNodes[0].nodeValue=lab+' '
-    : null;
-  document.getElementById('payhead').innerHTML = lab + ' <span class="ar">'+
-    (sortK==='pay'?(sortDir<0?'▼':'▲'):'↕')+'</span>';
-
-  // arrows on other headers
-  document.querySelectorAll('thead th').forEach(th=>{
-    const k=th.dataset.k; if(k==='pay'||k==='rank') return;
-    const has=th.querySelector('.ar'); if(has) has.remove();
-    const sp=document.createElement('span'); sp.className='ar';
-    sp.textContent = (sortK===k)?(sortDir<0?'▼':'▲'):'↕';
-    th.appendChild(document.createTextNode(' ')); th.appendChild(sp);
-  });
+function renderLeague(){
+  const lab=(basis==='granted'?'Granted pay':'Realized pay (CAP)')+(period==='latest'?' · latest FY':' · 5-yr');
+  document.getElementById('head').innerHTML =
+    '<th class="num" data-k="rank">#</th>'+
+    '<th data-k="company">Company <span class="ar">'+arrow('company')+'</span></th>'+
+    '<th data-k="ceo">CEO <span class="ar">'+arrow('ceo')+'</span></th>'+
+    '<th class="num" data-k="pay">'+lab+' <span class="ar">'+arrow('pay')+'</span></th>'+
+    '<th class="num" data-k="tsr">Peer-relative TSR <span class="ar">'+arrow('tsr')+'</span></th>'+
+    '<th class="num" data-k="mult">Realized ÷ Granted <span class="ar">'+arrow('mult')+'</span></th>'+
+    '<th data-k="flag">Note <span class="ar">'+arrow('flag')+'</span></th>';
 
   const q=query.trim().toLowerCase();
-  let list=data.filter(d=>{
-    if(!q) return true;
-    return d.ticker.toLowerCase().includes(q) ||
-           (NAME[d.ticker]||'').toLowerCase().includes(q) ||
-           (d.ceo||'').toLowerCase().includes(q);
-  });
-  list.sort(compare);
+  let list=league.filter(d=> !q || d.ticker.toLowerCase().includes(q) ||
+    (NAME[d.ticker]||'').toLowerCase().includes(q) || (d.ceo||'').toLowerCase().includes(q));
+  list.sort(compareLeague);
 
   const tb=document.getElementById('rows'); tb.innerHTML='';
   list.forEach((d,idx)=>{
-    const tr=document.createElement('tr');
-    const tsrCell = d.tsr===null ? '<span class="mut">—</span>'
-      : '<span class="badge '+(d.tsr>=0?'up':'down')+'">'+(d.tsr>=0?'+':'−')+
-        Math.abs(d.tsr).toFixed(0)+(d.tsr>=0?' ▲':' ▼')+'</span>';
     const multCell = d.mult===null ? '<span class="mut">—</span>'
-      : (d.mult<0?'<span class="neg">':'')+ d.mult.toFixed(d.mult<10?2:0)+'×'+(d.mult<0?'</span>':'');
-    tr.innerHTML =
-      '<td class="num rank">'+(idx+1)+'</td>'+
+      : (d.mult<0?'<span class="neg">':'')+d.mult.toFixed(d.mult<10?2:0)+'×'+(d.mult<0?'</span>':'');
+    const tr=document.createElement('tr');
+    tr.innerHTML='<td class="num rank">'+(idx+1)+'</td>'+
       '<td><span class="tick">'+d.ticker+'</span> <span class="name">'+(NAME[d.ticker]||'')+'</span></td>'+
       '<td>'+(d.ceo||'<span class="mut">—</span>')+'</td>'+
       '<td class="num pay">'+fmtMoney(payOf(d))+'</td>'+
-      '<td class="num">'+tsrCell+'</td>'+
+      '<td class="num">'+tsrBadge(d.tsr)+'</td>'+
       '<td class="num">'+multCell+'</td>'+
       '<td>'+fmtFlag(d.flags)+'</td>';
     tb.appendChild(tr);
   });
-  document.getElementById('count').textContent =
-    list.length+' of '+data.length+' companies'+(q?' (filtered)':'');
+  document.getElementById('count').textContent=list.length+' of 98 companies'+(q?' (filtered)':'');
 
-  // spotlight: top-3 by current pay metric
-  const top=[...data].filter(d=>payOf(d)!==null).sort((a,b)=>payOf(b)-payOf(a)).slice(0,3);
-  const names=top.map(d=>(NAME[d.ticker]||d.ticker)+' '+fmtMoney(payOf(d))).join(' · ');
-  const lead = basis==='granted'
+  const top=[...league].filter(d=>payOf(d)!==null).sort((a,b)=>payOf(b)-payOf(a)).slice(0,3)
+    .map(d=>(NAME[d.ticker]||d.ticker)+' '+fmtMoney(payOf(d))).join(' · ');
+  const lead=basis==='granted'
     ? 'The press quotes <b>granted</b> pay — the Summary Compensation Table figure.'
     : '<b>Realized (CAP)</b> re-marks equity to the share price — the headline league table reorders.';
-  document.getElementById('spot').innerHTML =
-    lead+' Top by '+(basis==='granted'?'granted':'realized')+
-    (period==='latest'?', latest FY':', 5-yr')+': '+names+'.';
+  document.getElementById('spot').innerHTML=lead+' Top by '+(basis==='granted'?'granted':'realized')+
+    (period==='latest'?', latest FY':', 5-yr')+': '+top+'.';
+}
+
+// ---- curated view ----
+function compareCurated(a,b){
+  if(sortK==='tsr'){ const av=a.tsr, bv=b.tsr; if(av===null)return 1; if(bv===null)return -1; return (av-bv)*sortDir; }
+  if(sortK==='company') return (a.company||a.ticker).localeCompare(b.company||b.ticker)*sortDir;
+  if(sortK==='ceo') return (a.ceo||'~').localeCompare(b.ceo||'~')*sortDir;
+  if(sortK==='payout') return (a.payout||'~').localeCompare(b.payout||'~')*sortDir;
+  if(sortK==='metric') return (METRIC[a.metric]||'~').localeCompare(METRIC[b.metric]||'~')*sortDir;
+  const av=a.tsr,bv=b.tsr; if(av===null)return 1; if(bv===null)return -1; return (av-bv)*sortDir;
+}
+function renderCurated(){
+  document.getElementById('head').innerHTML =
+    '<th class="num" data-k="rank">#</th>'+
+    '<th data-k="company">Company <span class="ar">'+arrow('company')+'</span></th>'+
+    '<th data-k="ceo">CEO <span class="ar">'+arrow('ceo')+'</span></th>'+
+    '<th data-k="payout">Payout vs target <span class="ar">'+arrow('payout')+'</span></th>'+
+    '<th data-k="metric">What it measures <span class="ar">'+arrow('metric')+'</span></th>'+
+    '<th class="num" data-k="tsr">Peer-relative TSR <span class="ar">'+arrow('tsr')+'</span></th>'+
+    '<th data-k="note">Note</th>';
+
+  const q=query.trim().toLowerCase();
+  let list=curated.filter(d=> !q || d.ticker.toLowerCase().includes(q) ||
+    (d.company||'').toLowerCase().includes(q) || (d.ceo||'').toLowerCase().includes(q));
+  list.sort(compareCurated);
+
+  const tb=document.getElementById('rows'); tb.innerHTML='';
+  list.forEach((d,idx)=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML='<td class="num rank">'+(idx+1)+'</td>'+
+      '<td><span class="tick">'+d.ticker+'</span> <span class="name">'+(d.company||'')+'</span></td>'+
+      '<td>'+(d.ceo||'<span class="mut">—</span>')+'</td>'+
+      '<td><span class="payout">'+(d.payout||'<span class="mut">—</span>')+'</span></td>'+
+      '<td><span class="metric">'+(METRIC[d.metric]||d.metric||'')+'</span></td>'+
+      '<td class="num">'+tsrBadge(d.tsr)+'</td>'+
+      '<td><span class="note">'+(d.note||'')+'</span></td>';
+    tb.appendChild(tr);
+  });
+  document.getElementById('count').textContent=list.length+' of 29 board-target companies'+(q?' (filtered)':'');
+  document.getElementById('spot').innerHTML=
+    'The board’s <b>own</b> payout-vs-target beside peer-relative delivery. Pay tracked delivery '+
+    '<b>up</b> at Eli Lilly (218% / +516) and Nvidia (150% / +1248), and <b>down</b> at UnitedHealth '+
+    '(0% LTI in its crisis year). Apple and Microsoft took at/above-target bonuses while the stock lagged '+
+    'the board’s own peers. For founders (Meta, Tesla, Palantir) “payout vs target” is largely undefined.';
+}
+
+// ---- dispatch ----
+function render(){
+  document.getElementById('ctl-basis').classList.toggle('hide', view!=='league');
+  document.getElementById('ctl-period').classList.toggle('hide', view!=='league');
+  if(view==='league') renderLeague(); else renderCurated();
+  bindHeaders();
+}
+function bindHeaders(){
+  document.querySelectorAll('thead th').forEach(th=>{
+    if(th.dataset.k==='rank'||th.dataset.k==='note') return;
+    th.addEventListener('click',()=>{
+      const k=th.dataset.k;
+      if(sortK===k) sortDir*=-1;
+      else { sortK=k; sortDir=(k==='company'||k==='ceo'||k==='flag'||k==='payout'||k==='metric')?1:-1; }
+      render();
+    });
+  });
 }
 
 // ---- wire controls ----
-function segHandler(id, set){
+function segHandler(id,set){
   document.getElementById(id).addEventListener('click',e=>{
     const b=e.target.closest('button'); if(!b) return;
     document.querySelectorAll('#'+id+' button').forEach(x=>x.classList.remove('on'));
     b.classList.add('on'); set(b.dataset.v); render();
   });
 }
+segHandler('view', v=>{ view=v; sortK=(v==='league')?'pay':'tsr'; sortDir=-1; });
 segHandler('basis', v=>{ basis=v; sortK='pay'; sortDir=-1; });
 segHandler('period', v=>{ period=v; sortK='pay'; sortDir=-1; });
-
-document.querySelectorAll('thead th').forEach(th=>{
-  if(th.dataset.k==='rank') return;
-  th.addEventListener('click',()=>{
-    const k=th.dataset.k;
-    if(sortK===k) sortDir*=-1;
-    else { sortK=k; sortDir = (k==='company'||k==='ceo'||k==='flag')?1:-1; }
-    render();
-  });
-});
 document.getElementById('q').addEventListener('input',e=>{ query=e.target.value; render(); });
 
 render();
