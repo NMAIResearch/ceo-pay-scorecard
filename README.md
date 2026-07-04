@@ -4,7 +4,7 @@ An interactive front-end to *The CEO Pay-vs-Delivery Scorecard*: a reproducible,
 
 **Live tool:** _(enable GitHub Pages, then paste the URL here)_
 **Canonical record (frozen, citable):** [DOI 10.5281/zenodo.20680109](https://doi.org/10.5281/zenodo.20680109)
-**Author:** N. Milton · ORCID [0009-0003-4213-7769](https://orcid.org/0009-0003-4213-7769) · Licence CC BY 4.0
+**Author:** NM AI Research · ORCID [0009-0003-4213-7769](https://orcid.org/0009-0003-4213-7769) · Licence CC BY 4.0
 
 ## What it does
 
