@@ -1,5 +1,5 @@
 {
-  "title": "The CEO Pay-vs-Delivery Scorecard (interactive)",
+  "title": "The CEO Pay-vs-Delivery Scorecard, interactive (S&P 500)",
   "upload_type": "software",
   "license": "CC-BY-4.0",
   "creators": [
@@ -8,7 +8,7 @@
       "orcid": "0009-0003-4213-7769"
     }
   ],
-  "description": "An interactive, explorable front-end to the CEO Pay-vs-Delivery Scorecard: a reproducible, primary-sourced, descriptive audit of what the S&P-100's highest-paid CEOs took (granted pay vs realized Compensation Actually Paid) versus what they delivered (the board's own payout-vs-target and peer-relative shareholder return). Two views: a 98-company league table and a 29-company board-target layer. Companion to the paper at DOI 10.5281/zenodo.20680109. Built free from SEC EDGAR Pay-versus-Performance disclosures (Item 402(v)); descriptive only, issues no overpaid verdict. CC BY 4.0.",
+  "description": "An interactive, explorable front-end to the CEO Pay-vs-Delivery Scorecard: a reproducible, primary-sourced, descriptive audit of what the S&P 500's highest-paid CEOs took (granted pay vs realized Compensation Actually Paid) versus what they delivered (the board's own payout-vs-target and peer-relative shareholder return). Two views: a 494-company S&P 500 league table and a 29-company board-target layer. Companion to the v2 paper at DOI 10.5281/zenodo.21445815. Built free from SEC EDGAR Pay-versus-Performance disclosures (Item 402(v)); descriptive only, issues no overpaid verdict. CC BY 4.0.",
   "keywords": [
     "executive compensation",
     "CEO pay",
@@ -17,13 +17,13 @@
     "SEC EDGAR",
     "reproducibility",
     "interactive visualization",
-    "S&P 100",
+    "S&P 500",
     "corporate governance"
   ],
   "related_identifiers": [
     {
       "relation": "isSupplementTo",
-      "identifier": "10.5281/zenodo.20680109",
+      "identifier": "10.5281/zenodo.21445815",
       "scheme": "doi"
     }
   ]

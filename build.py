@@ -6,7 +6,7 @@ The interactive page carries its data inline (so it renders standalone, includin
 the copy archived on Zenodo). This script keeps those inline copies in sync with
 the source CSVs: edit a CSV, run `python3 build.py`, commit the new index.html.
 
-  scorecard_v0.csv   -> const CSV      (the 98-company league table)
+  scorecard_sp500.csv -> const CSV     (the 494-company S&P 500 league table)
   curated_targets.csv -> const CURATED (the 29-company board-target layer)
 
 Pure standard library, no dependencies.
@@ -20,7 +20,7 @@ HTML = HERE / "index.html"
 
 # (variable name in the page, source CSV file)
 BLOCKS = [
-    ("CSV", HERE / "scorecard_v0.csv"),
+    ("CSV", HERE / "scorecard_sp500.csv"),
     ("CURATED", HERE / "curated_targets.csv"),
 ]
 

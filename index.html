@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CEO Pay-vs-Delivery Scorecard — interactive</title>
+<title>CEO Pay-vs-Delivery Scorecard: S&amp;P 500 (interactive)</title>
 <style>
   :root{
     --navy:#1a365d; --slate:#4a5568; --body:#2d3748; --alt:#f7fafc;
@@ -74,14 +74,14 @@
 <div class="wrap">
   <p style="margin:0 0 10px;font-size:13px"><a href="https://nmairesearch.github.io/" style="color:var(--accent);text-decoration:none">&larr; NM AI Research · research portfolio</a></p>
   <h1>The CEO Pay-vs-Delivery Scorecard</h1>
-  <p class="sub">What the S&amp;P-100's highest-paid CEOs <em>took</em> versus what they <em>delivered</em> — descriptive, primary-sourced, reproducible.</p>
-  <p class="stamp">Interactive front-end over the frozen v0.3 dataset · data as of 2026-06-13 (red-team rev. 2026-07-03) · canonical record: <a href="https://doi.org/10.5281/zenodo.20680109" target="_blank" rel="noopener">DOI 10.5281/zenodo.20680109</a> · NM AI Research, ORCID 0009-0003-4213-7769 · CC BY 4.0</p>
+  <p class="sub">What the S&amp;P 500's highest-paid CEOs <em>took</em> versus what they <em>delivered</em>: descriptive, primary-sourced, reproducible.</p>
+  <p class="stamp">Interactive front-end over the frozen v2 (S&amp;P 500) dataset · data as of 2026-07-19 · canonical record: <a href="https://doi.org/10.5281/zenodo.21445815" target="_blank" rel="noopener">DOI 10.5281/zenodo.21445815</a> · NM AI Research, ORCID 0009-0003-4213-7769 · CC BY 4.0</p>
 
   <div class="controls">
     <div class="ctl">
       <label>View</label>
       <div class="seg" id="view">
-        <button data-v="league" class="on">League table · 98</button>
+        <button data-v="league" class="on">League table · 494</button>
         <button data-v="curated">Board targets · 29</button>
       </div>
     </div>
@@ -114,39 +114,21 @@
   <p class="count" id="count"></p>
 
   <div class="foot">
-    <p><b>League table.</b> <b>Granted</b> is the Summary Compensation Table figure the press quotes. <b>Realized (CAP)</b> is Compensation Actually Paid — the SEC measure that re-marks equity to the share price; an accounting fair value, not cash-in-pocket. Flip the basis and the table reorders: that reordering is the central finding (F1).</p>
-    <p><b>Board targets.</b> For 29 hand-curated companies, the board's <em>own</em> payout-versus-target set beside peer-relative delivery (F4). The <b>metric</b> column declares what each payout measures, because an annual-cash-bonus % and a PSU-vesting % are different things and must not be conflated (e.g. Apple's 200% is a cash bonus; Alphabet's 200% is PSU vesting). Two of the 29 (American Tower, Intel) were hand-read from rendered proxies and are not in the 98-company machine-readable spine.</p>
-    <p><b>Peer-relative TSR</b> is the company's cumulative total shareholder return ($100 invested at the window start) minus the <em>board's own chosen peer index</em>. A lag can mean the benchmark ran hot, not that the company cratered (semiconductor peer indices inflated by Nvidia). Green = beat the chosen peers; red = lagged them.</p>
+    <p><b>League table.</b> <b>Granted</b> is the Summary Compensation Table figure the press quotes. <b>Realized (CAP)</b> is Compensation Actually Paid, the SEC measure that re-marks equity to the share price; an accounting fair value, not cash-in-pocket. Flip the basis and the table reorders: that reordering is the central finding (F1).</p>
+    <p><b>Board targets.</b> For 29 hand-curated companies, the board's <em>own</em> payout-versus-target set beside peer-relative delivery (F4). The <b>metric</b> column declares what each payout measures, because an annual-cash-bonus % and a PSU-vesting % are different things and must not be conflated (e.g. Apple's 200% is a cash bonus; Alphabet's 200% is PSU vesting). Two of the 29 (American Tower, Intel) were hand-read from rendered proxies and are not in the 494-company machine-readable spine.</p>
+    <p><b>Peer-relative TSR</b> is the company's cumulative total shareholder return ($100 invested at the window start) minus the <em>board's own chosen peer index</em>. A lag can mean the benchmark rose sharply, not that the company underperformed (semiconductor peer indices inflated by Nvidia). Green = beat the chosen peers; red = lagged them.</p>
     <details>
-      <summary>Guardrails — read before citing</summary>
-      <p style="margin-top:10px"><b>Attribution:</b> TSR is not caused by the CEO (macro, sector, luck, predecessor). This is a co-incidence of pay and peer-relative return, not causation — never read it as "overpaid." <b>CAP caveat:</b> swings with the share price; not cash received. <b>Peer-group choice is the company's own</b> and drives the gap. <b>Samples differ:</b> the league table is the 98-company automated spine (population beat-rate 46/96 ≈ a coin-flip); the 29 board-target companies are a non-random, high-pay sample — do not generalise from them.</p>
+      <summary>Guardrails: read before citing</summary>
+      <p style="margin-top:10px"><b>Attribution:</b> TSR is not caused by the CEO (macro, sector, luck, predecessor). This is a co-incidence of pay and peer-relative return, not causation; never read it as "overpaid." <b>CAP caveat:</b> swings with the share price; not cash received. <b>Peer-group choice is the company's own</b> and drives the gap. <b>Samples differ:</b> the league table is the 494-company automated spine (population beat-rate 229/492 ≈ 46.5%, a coin-flip); the 29 board-target companies are a non-random, high-pay sample, so do not generalise from them.</p>
     </details>
     <p style="margin-top:12px"><b>Disclosure.</b> The author holds no direct position in any company named. A workplace defined-contribution pension may hold some indirectly through pooled funds, not directed by the author. No third party reviewed, funded, or directed this work.</p>
-    <p><b>Reproducibility.</b> Built free from SEC EDGAR DEF 14A Pay-versus-Performance disclosures (Item 402(v)); 98 companies, 539 company-years. This page embeds the frozen <code>scorecard_v0.csv</code> and <code>curated_targets.csv</code> verbatim (regenerated by <code>build.py</code>); the canonical, citable version is the Zenodo DOI above.</p>
+    <p><b>Reproducibility.</b> Built free from SEC EDGAR DEF 14A Pay-versus-Performance disclosures (Item 402(v)); 494 companies, 2,741 company-years. This page embeds the frozen <code>scorecard_sp500.csv</code> and <code>curated_targets.csv</code> verbatim (regenerated by <code>build.py</code>); the canonical, citable version is the Zenodo DOI above.</p>
   </div>
 </div>
 
 <script>
-// ---- ticker -> company name (S&P-100) ----
-const NAME = {
- AAPL:"Apple",ABBV:"AbbVie",ABT:"Abbott",ACN:"Accenture",ADBE:"Adobe",AMAT:"Applied Materials",
- AMD:"AMD",AMGN:"Amgen",AMT:"American Tower",AMZN:"Amazon",AVGO:"Broadcom",AXP:"American Express",
- BA:"Boeing",BAC:"Bank of America",BKNG:"Booking Holdings",BLK:"BlackRock",BMY:"Bristol Myers Squibb",
- BNY:"BNY Mellon","BRK-B":"Berkshire Hathaway",C:"Citigroup",CAT:"Caterpillar",CL:"Colgate-Palmolive",
- CMCSA:"Comcast",COF:"Capital One",COP:"ConocoPhillips",COST:"Costco",CRM:"Salesforce",CSCO:"Cisco",
- CVS:"CVS Health",CVX:"Chevron",DE:"Deere",DHR:"Danaher",DIS:"Walt Disney",DUK:"Duke Energy",
- EMR:"Emerson Electric",FDX:"FedEx",GD:"General Dynamics",GE:"GE Aerospace",GEV:"GE Vernova",
- GILD:"Gilead Sciences",GM:"General Motors",GOOGL:"Alphabet",GS:"Goldman Sachs",HD:"Home Depot",
- HON:"Honeywell",IBM:"IBM",INTC:"Intel",INTU:"Intuit",ISRG:"Intuitive Surgical",JNJ:"Johnson & Johnson",
- JPM:"JPMorgan Chase",KO:"Coca-Cola",LIN:"Linde",LLY:"Eli Lilly",LMT:"Lockheed Martin",LOW:"Lowe's",
- LRCX:"Lam Research",MA:"Mastercard",MCD:"McDonald's",MDLZ:"Mondelez",MDT:"Medtronic",META:"Meta",
- MMM:"3M",MO:"Altria",MRK:"Merck",MS:"Morgan Stanley",MSFT:"Microsoft",MU:"Micron",NEE:"NextEra Energy",
- NFLX:"Netflix",NKE:"Nike",NOW:"ServiceNow",NVDA:"Nvidia",ORCL:"Oracle",PEP:"PepsiCo",PFE:"Pfizer",
- PG:"Procter & Gamble",PLTR:"Palantir",PM:"Philip Morris",QCOM:"Qualcomm",RTX:"RTX",SBUX:"Starbucks",
- SCHW:"Charles Schwab",SO:"Southern Company",SPG:"Simon Property",T:"AT&T",TMO:"Thermo Fisher",
- TMUS:"T-Mobile",TSLA:"Tesla",TXN:"Texas Instruments",UBER:"Uber",UNH:"UnitedHealth",UNP:"Union Pacific",
- UPS:"UPS",USB:"U.S. Bancorp",V:"Visa",VZ:"Verizon",WFC:"Wells Fargo",WMT:"Walmart",XOM:"Exxon Mobil"
-};
+// ---- ticker -> company name (S&P 500) ----
+const NAME = {A:"Agilent Technologies",AAPL:"Apple",ABBV:"AbbVie",ABNB:"Airbnb",ABT:"Abbott",ACGL:"Arch Capital",ACN:"Accenture",ADBE:"Adobe",ADI:"Analog Devices",ADM:"Archer Daniels Midland",ADP:"Automatic Data Processing",ADSK:"Autodesk",AEE:"Ameren",AEP:"American Electric Power",AES:"AES",AFL:"Aflac",AIG:"American International",AIZ:"Assurant",AJG:"Arthur J. Gallagher &",AKAM:"Akamai Technologies",ALB:"Albemarle",ALGN:"Align Technology",ALL:"Allstate",ALLE:"Allegion",AMAT:"Applied Materials",AMCR:"Amcor",AMD:"AMD",AME:"Ametek",AMGN:"Amgen",AMP:"Ameriprise Financial",AMZN:"Amazon",ANET:"Arista Networks",AON:"Aon",AOS:"A. O. Smith",APA:"APA",APD:"Air Products",APH:"Amphenol",APO:"Apollo Global Management",APP:"AppLovin",APTV:"Aptiv",ARE:"Alexandria Real Estate Equities",ARES:"Ares Management",ATO:"Atmos Energy",AVB:"AvalonBay Communities",AVGO:"Broadcom",AVY:"Avery Dennison",AWK:"American Water Works",AXON:"Axon Enterprise",AXP:"American Express",AZO:"AutoZone",BA:"Boeing",BAC:"Bank of America",BALL:"Ball",BAX:"Baxter International",BBY:"Best Buy",BDX:"Becton Dickinson",BEN:"Franklin Resources","BF-B":"Brown-Forman",BG:"Bunge Global",BIIB:"Biogen",BKNG:"Booking Holdings",BKR:"Baker Hughes",BLDR:"Builders FirstSource",BLK:"BlackRock",BMY:"Bristol Myers Squibb",BNY:"BNY Mellon",BR:"Broadridge Financial Solutions","BRK-B":"Berkshire Hathaway",BRO:"Brown & Brown",BSX:"Boston Scientific",BXP:"BXP",C:"Citigroup",CAH:"Cardinal Health",CARR:"Carrier Global",CASY:"Casey's",CAT:"Caterpillar",CB:"Chubb Limited",CBOE:"Cboe Global Markets",CBRE:"CBRE",CCI:"Crown Castle",CCL:"Carnival",CDNS:"Cadence Design Systems",CDW:"CDW",CEG:"Constellation Energy",CF:"CF Industries",CFG:"Citizens Financial",CHD:"Church & Dwight",CHRW:"C.H. Robinson",CHTR:"Charter Communications",CI:"Cigna",CIEN:"Ciena",CINF:"Cincinnati Financial",CL:"Colgate-Palmolive",CLX:"Clorox",CMCSA:"Comcast",CME:"CME",CMG:"Chipotle Mexican Grill",CMI:"Cummins",CMS:"CMS Energy",CNC:"Centene",CNP:"CenterPoint Energy",COF:"Capital One",COHR:"Coherent",COIN:"Coinbase",COO:"Cooper Companies (The)",COP:"ConocoPhillips",COR:"Cencora",COST:"Costco",CPAY:"Corpay",CPRT:"Copart",CPT:"Camden Property Trust",CRH:"CRH",CRL:"Charles River Laboratories",CRM:"Salesforce",CRWD:"CrowdStrike",CSCO:"Cisco",CSGP:"CoStar",CSX:"CSX",CTAS:"Cintas",CTSH:"Cognizant",CTVA:"Corteva",CVNA:"Carvana",CVS:"CVS Health",CVX:"Chevron",D:"Dominion Energy",DAL:"Delta Air Lines",DASH:"DoorDash",DD:"DuPont",DDOG:"Datadog",DE:"Deere",DECK:"Deckers Brands",DELL:"Dell Technologies",DG:"Dollar General",DGX:"Quest Diagnostics",DHI:"D. R. Horton",DHR:"Danaher",DIS:"Walt Disney",DLR:"Digital Realty",DLTR:"Dollar Tree",DOC:"Healthpeak Properties",DOV:"Dover",DOW:"Dow",DPZ:"Domino's",DRI:"Darden Restaurants",DTE:"DTE Energy",DUK:"Duke Energy",DVA:"DaVita",DVN:"Devon Energy",DXCM:"Dexcom",EA:"Electronic Arts",EBAY:"eBay",ECHO:"EchoStar",ECL:"Ecolab",ED:"Consolidated Edison",EFX:"Equifax",EG:"Everest",EIX:"Edison International",EL:"Est\u00e9e Lauder Companies (The)",ELV:"Elevance Health",EME:"Emcor",EMR:"Emerson Electric",EOG:"EOG Resources",EQIX:"Equinix",EQR:"Equity Residential",EQT:"EQT",ES:"Eversource Energy",ESS:"Essex Property Trust",ETN:"Eaton",ETR:"Entergy",EVRG:"Evergy",EW:"Edwards Lifesciences",EXC:"Exelon",EXE:"Expand Energy",EXPD:"Expeditors International",EXPE:"Expedia",EXR:"Extra Space Storage",F:"Ford Motor",FANG:"Diamondback Energy",FAST:"Fastenal",FCX:"Freeport-McMoRan",FDS:"FactSet",FDX:"FedEx",FE:"FirstEnergy",FFIV:"F5",FICO:"Fair Isaac",FIS:"Fidelity National Information Services",FISV:"Fiserv",FITB:"Fifth Third Bancorp",FIX:"Comfort Systems USA",FLEX:"Flex",FOX:"Fox",FOXA:"Fox",FRT:"Federal Realty Investment Trust",FSLR:"First Solar",FTNT:"Fortinet",FTV:"Fortive",GD:"General Dynamics",GDDY:"GoDaddy",GE:"GE Aerospace",GEHC:"GE HealthCare",GEN:"Gen Digital",GEV:"GE Vernova",GILD:"Gilead Sciences",GIS:"General Mills",GL:"Globe Life",GLW:"Corning",GM:"General Motors",GNRC:"Generac",GOOG:"Alphabet",GOOGL:"Alphabet",GPC:"Genuine Parts",GPN:"Global Payments",GRMN:"Garmin",GS:"Goldman Sachs",GWW:"W. W. Grainger",HAL:"Halliburton",HAS:"Hasbro",HBAN:"Huntington Bancshares",HCA:"HCA Healthcare",HD:"Home Depot",HIG:"Hartford (The)",HII:"Huntington Ingalls Industries",HLT:"Hilton Worldwide",HON:"Honeywell",HOOD:"Robinhood Markets",HPE:"Hewlett Packard Enterprise",HPQ:"HP",HRL:"Hormel Foods",HSIC:"Henry Schein",HST:"Host Hotels & Resorts",HSY:"Hershey Company (The)",HUBB:"Hubbell Incorporated",HUM:"Humana",HWM:"Howmet Aerospace",IBKR:"Interactive Brokers",IBM:"IBM",ICE:"Intercontinental Exchange",IDXX:"Idexx Laboratories",IEX:"IDEX",IFF:"International Flavors & Fragrances",INCY:"Incyte",INTU:"Intuit",INVH:"Invitation Homes",IP:"International Paper",IQV:"IQVIA",IR:"Ingersoll Rand",IRM:"Iron Mountain",ISRG:"Intuitive Surgical",IT:"Gartner",ITW:"Illinois Tool Works",IVZ:"Invesco",J:"Jacobs Solutions",JBHT:"J.B. Hunt",JBL:"Jabil",JCI:"Johnson Controls",JKHY:"Jack Henry & Associates",JNJ:"Johnson & Johnson",JPM:"JPMorgan Chase",KDP:"Keurig Dr Pepper",KEY:"Key",KEYS:"Keysight Technologies",KHC:"Kraft Heinz",KIM:"Kimco Realty",KLAC:"KLA",KMB:"Kimberly-Clark",KMI:"Kinder Morgan",KO:"Coca-Cola",KR:"Kroger",KVUE:"Kenvue",L:"Loews",LDOS:"Leidos",LEN:"Lennar",LH:"Labcorp",LHX:"L3Harris",LII:"Lennox International",LIN:"Linde",LITE:"Lumentum",LLY:"Eli Lilly",LMT:"Lockheed Martin",LNT:"Alliant Energy",LOW:"Lowe's",LRCX:"Lam Research",LULU:"Lululemon Athletica",LUV:"Southwest Airlines",LVS:"Las Vegas Sands",LYB:"LyondellBasell",LYV:"Live Nation Entertainment",MA:"Mastercard",MAA:"Mid-America Apartment Communities",MAR:"Marriott International",MAS:"Masco",MCD:"McDonald's",MCHP:"Microchip Technology",MCK:"McKesson",MCO:"Moody's",MDLZ:"Mondelez",MDT:"Medtronic",MET:"MetLife",META:"Meta",MGM:"MGM Resorts",MKC:"McCormick &",MLM:"Martin Marietta Materials",MMM:"3M",MNST:"Monster Beverage",MO:"Altria",MOS:"Mosaic Company (The)",MPC:"Marathon Petroleum",MPWR:"Monolithic Power Systems",MRK:"Merck",MRNA:"Moderna",MRSH:"Marsh McLennan",MRVL:"Marvell Technology",MS:"Morgan Stanley",MSCI:"MSCI",MSFT:"Microsoft",MSI:"Motorola Solutions",MTB:"M&T Bank",MTD:"Mettler Toledo",MU:"Micron",NCLH:"Norwegian Cruise Line",NDAQ:"Nasdaq",NDSN:"Nordson",NEE:"NextEra Energy",NEM:"Newmont",NFLX:"Netflix",NI:"NiSource",NKE:"Nike",NOC:"Northrop Grumman",NOW:"ServiceNow",NRG:"NRG Energy",NSC:"Norfolk Southern",NTAP:"NetApp",NTRS:"Northern Trust",NUE:"Nucor",NVDA:"Nvidia",NVR:"NVR",NWS:"News",NWSA:"News",NXPI:"NXP Semiconductors",O:"Realty Income",ODFL:"Old Dominion",OKE:"Oneok",OMC:"Omnicom",ON:"ON Semiconductor",ORCL:"Oracle",ORLY:"O\u2019Reilly Automotive",OTIS:"Otis Worldwide",OXY:"Occidental Petroleum",PANW:"Palo Alto Networks",PAYX:"Paychex",PCAR:"Paccar",PCG:"PG&E",PEG:"Public Service Enterprise",PEP:"PepsiCo",PFE:"Pfizer",PFG:"Principal Financial",PG:"Procter & Gamble",PGR:"Progressive",PH:"Parker Hannifin",PHM:"Pulte",PKG:"Packaging Corporation of America",PLD:"Prologis",PLTR:"Palantir",PM:"Philip Morris",PNC:"PNC Financial Services",PNR:"Pentair",PNW:"Pinnacle West Capital",PODD:"Insulet",PPG:"PPG Industries",PPL:"PPL",PRU:"Prudential Financial",PSA:"Public Storage",PSX:"Phillips 66",PTC:"PTC",PWR:"Quanta Services",PYPL:"PayPal",Q:"Qnity Electronics",QCOM:"Qualcomm",RCL:"Royal Caribbean",REG:"Regency Centers",REGN:"Regeneron Pharmaceuticals",RF:"Regions Financial",RJF:"Raymond James Financial",RL:"Ralph Lauren",RMD:"ResMed",ROK:"Rockwell Automation",ROL:"Rollins",ROP:"Roper Technologies",ROST:"Ross Stores",RSG:"Republic Services",RTX:"RTX",RVTY:"Revvity",SBAC:"SBA Communications",SBUX:"Starbucks",SCHW:"Charles Schwab",SHW:"Sherwin-Williams",SJM:"J.M. Smucker Company (The)",SLB:"Schlumberger",SMCI:"Supermicro",SNA:"Snap-on",SNDK:"Sandisk",SNPS:"Synopsys",SO:"Southern Company",SOLV:"Solventum",SPG:"Simon Property",SPGI:"S&P Global",SRE:"Sempra",STE:"Steris",STLD:"Steel Dynamics",STT:"State Street",STX:"Seagate Technology",STZ:"Constellation Brands",SW:"Smurfit Westrock",SWK:"Stanley Black & Decker",SWKS:"Skyworks Solutions",SYK:"Stryker",SYY:"Sysco",T:"AT&T",TAP:"Molson Coors Beverage",TDG:"TransDigm",TDY:"Teledyne Technologies",TECH:"Bio-Techne",TEL:"TE Connectivity",TER:"Teradyne",TFC:"Truist Financial",TGT:"Target",TJX:"TJX Companies",TKO:"TKO",TMO:"Thermo Fisher",TMUS:"T-Mobile",TPL:"Texas Pacific Land",TPR:"Tapestry",TRGP:"Targa Resources",TRMB:"Trimble",TROW:"T. Rowe Price",TRV:"Travelers Companies (The)",TSCO:"Tractor Supply",TSLA:"Tesla",TSN:"Tyson Foods",TT:"Trane Technologies",TTD:"Trade Desk (The)",TTWO:"Take-Two Interactive",TXN:"Texas Instruments",TXT:"Textron",TYL:"Tyler Technologies",UAL:"United Airlines",UBER:"Uber",UDR:"UDR",UHS:"Universal Health Services",ULTA:"Ulta Beauty",UNH:"UnitedHealth",UNP:"Union Pacific",UPS:"UPS",URI:"United Rentals",USB:"U.S. Bancorp",V:"Visa",VEEV:"Veeva Systems",VICI:"Vici Properties",VLO:"Valero Energy",VLTO:"Veralto",VMC:"Vulcan Materials",VRSK:"Verisk Analytics",VRSN:"Verisign",VRT:"Vertiv",VRTX:"Vertex Pharmaceuticals",VST:"Vistra",VTR:"Ventas",VTRS:"Viatris",VZ:"Verizon",WAB:"Wabtec",WAT:"Waters",WBD:"Warner Bros. Discovery",WDAY:"Workday",WDC:"Western Digital",WEC:"WEC Energy",WELL:"Welltower",WFC:"Wells Fargo",WM:"Waste Management",WMB:"Williams Companies",WMT:"Walmart",WRB:"W. R. Berkley",WSM:"Williams-Sonoma",WST:"West Pharmaceutical Services",WTW:"Willis Towers Watson",WY:"Weyerhaeuser",WYNN:"Wynn Resorts",XEL:"Xcel Energy",XOM:"Exxon Mobil",XYL:"Xylem",XYZ:"Block",YUM:"Yum! Brands",ZBH:"Zimmer Biomet",ZBRA:"Zebra Technologies",ZTS:"Zoetis"};
 const METRIC = {
  annual_cash_bonus:"annual cash bonus", LTI_PSU_metric:"LTI / PSU",
  equity_milestone:"equity milestone", service_equity:"service equity",
@@ -155,51 +137,115 @@ const METRIC = {
 
 // ---- frozen data: regenerated from CSV by build.py ----
 const CSV = `ticker,latest_fy,latest_ceo,latest_granted_usd,latest_cap_usd,window_granted_usd,window_cap_usd,company_tsr_idx,peer_tsr_idx,tsr_vs_peer,beat_peers,cap_to_granted_x,flags
-TSLA,2023,Mr. Musk,0,1403000000,0,49735000000,891,209,682.0,True,,EQUITY_ONLY_SCT_ZERO
+TSLA,2023,,0,1403000000,0,49735000000,891,209,682.0,True,,EQUITY_ONLY_SCT_ZERO
 PLTR,2025,Mr. Karp,8623000,11094359597,26727584,16382762764,754.78,258.38,496.4,True,1286.6,
 AVGO,2025,Hock E. Tan,205278006,2267505200,491049307,4319505200,1182.35,243.37,939.0,True,11.05,
-GOOGL,2025,Sundar Pichai,10906079,213903156,262817341,1047855099,360.95,138.27,222.7,True,19.61,
+COIN,2025,Mr. Armstrong,9713000,37243000,32385267,1998436783,69,209,-140.0,False,3.83,
+HOOD,2025,Mr. Tenev,3004978,1020806245,805002943,1241102747,324.81,116.53,208.3,True,339.71,
+WELL,2025,Shankh Mitra,821090355,999622730,885646307,1175890055,328.20,137.83,190.4,True,1.22,
+PANW,2025,Nikesh Arora,99736336,267474290,342892749,1067365657,407.00,280.58,126.4,True,2.68,
+GOOGL,2025,,10906079,213903156,262817341,1047855099,360.95,138.27,222.7,True,19.61,
+GOOG,2025,,10906079,213903156,262817341,1047855099,360.95,138.27,222.7,True,19.61,
 ORCL,2025,Safra A. Catz,1113417,461805673,161651586,1039751967,231.5,172.38,59.1,True,414.76,
 NVDA,2026,Jen-Hsun Huang,36343830,162180936,165472568,841926089,1445.67,198.10,1247.6,True,4.46,
-AAPL,2025,Mr. Cook,74294811,108423733,410268949,824726711,233.88,279.51,-45.6,False,1.46,
+AAPL,2025,,74294811,108423733,410268949,824726711,233.88,279.51,-45.6,False,1.46,
+WBD,2025,Mr. Zaslav,165009366,636141723,552492414,824319770,96,228,-132.0,False,3.86,
 JPM,2025,James Dimon,40632724,246827058,235046318,747732121,289.18,203.21,86.0,True,6.07,
+CRWD,2026,George Kurtz,247579143,330345041,513986725,745806779,204.54,256.43,-51.9,False,1.33,
+APP,2025,Adam Foroughi,12969001,21689564,107741478,694740637,1033.47,234.47,799.0,True,1.67,
+AXON,2025,Patrick Smith,40001,-12580422,164672098,683422103,463.27,187.14,276.1,True,-314.5,
 GE,2025,"H. Lawrence Culp, Jr.",45616160,213466111,180130504,678185430,586,189,397.0,True,4.68,
-NFLX,2025,Sarandos/Peters,53905972,55552263,510959143,638552963,173.4,138.27,35.1,True,1.03,CEO_TRANSITION
-MSFT,2025,Satya Nadella,96496790,131138799,328920100,591596050,255,276,-21.0,False,1.36,
+NFLX,2025,,53905972,55552263,510959143,638552963,173.4,138.27,35.1,True,1.03,CEO_TRANSITION
+TTD,2025,Jeff Green,27431583,-856762595,906603141,605207828,47.39,137.99,-90.6,False,-31.23,
+MSFT,2025,,96496790,131138799,328920100,591596050,255,276,-21.0,False,1.36,
 GS,2025,Mr. Solomon,118891684,309806309,250032836,567150997,375,203,172.0,True,2.61,
+ARES,2025,Michael J Arougheti,68279532,52496782,289681960,499443334,399,196,203.0,True,0.77,
+MPWR,2025,Mr. Hsing,19930736,250151561,94473264,457776790,256.61,253.38,3.2,True,12.55,
 BKNG,2025,Mr. Fogel,35418102,64782562,213570407,441265556,244.36,138.27,106.1,True,1.83,
+FICO,2025,Mr. Lansing,36045267,-38933283,176299290,432255018,351.82,162.2,189.6,True,-1.08,
 LLY,2025,Mr. Ricks,36698337,75185008,135415115,416427624,670.56,154.11,516.4,True,2.05,
 AXP,2025,Mr. Squeri,46239805,95383330,192624668,372979252,326,203,123.0,True,2.06,
+CDNS,2025,Dr. Devgan,56547667,95274525,158299876,368026547,229,258,-29.0,False,1.68,CEO_TRANSITION
 AMAT,2025,Mr. Dickerson,29649352,86971543,139968639,367769252,392.09,313.53,78.6,True,2.93,
+REGN,2025,Leonard S. Schleifer,7280549,38950031,35762504,364856269,159.77,200.89,-41.1,False,5.35,
 NOW,2025,Mr. McDermott,51550957,-83286935,331019884,363319382,139,227,-88.0,False,-1.62,
+MRNA,2025,Mr. Bancel,19932217,15803141,94396298,352851779,28,120,-92.0,False,0.79,
 AMD,2025,Lisa Su,55161779,146727337,176224480,346172507,234,547,-313.0,False,2.66,
+LEN,2025,,29527931,-11774256,343341752,342747410,201.13,232.34,-31.2,False,-0.4,CEO_TRANSITION
+SMCI,2025,Mr. Liang,442,-190338364,46194342,335369552,1726.31,276.13,1450.2,True,-430629.78,
+LYV,2025,Michael Rapino,32552324,52276782,241799407,334667070,193.93,81.97,112.0,True,1.61,
+WSM,2026,Laura Alber,33297422,56216918,123332918,332578800,349.00,164.12,184.9,True,1.69,
+AIG,2025,Peter Zaffino,32460049,67983800,192905314,329190223,253.09,234.32,18.8,True,2.09,CEO_TRANSITION
+TDG,2025,Kevin M. Stein,25188430,27144336,110660673,328727134,333.54,282.62,50.9,True,1.08,
 ABBV,2025,,32530984,57365441,155387700,326712692,259.36,186.74,72.6,True,1.76,CEO_TRANSITION
 MS,2025,Edward Pick,37187657,92936732,169360835,312628761,304,203,101.0,True,2.5,
+WMB,2025,,17919373,31816791,88121654,308974343,384.31,302.61,81.7,True,1.78,CEO_TRANSITION
 WFC,2025,Mr. Scharf,94522642,136245977,196795831,305864182,347,196,151.0,True,1.44,
+WDAY,2026,Carl Eschenbach,26031706,-17705405,282477729,302150062,77,125,-48.0,False,-0.68,CEO_TRANSITION
+EXPE,2025,,17592584,70393447,341364795,296453365,215.72,138.27,77.4,True,4.0,CEO_TRANSITION
+FLEX,2026,Revathi Advaithi,44391138,169414161,105905059,291326320,491,718,-227.0,False,3.82,
 TMUS,2025,,50408096,63432371,205047320,289990047,156,112,44.0,True,1.26,CEO_TRANSITION
 CAT,2025,,22191496,82309936,135196833,285382279,346.12,189.72,156.4,True,3.71,CEO_TRANSITION
 MU,2025,Sanjay Mehrotra,30940146,86570533,140434743,283382814,269.61,261.97,7.6,True,2.8,
+KLAC,2025,Richard Wallace,25092254,34769252,108848591,283227512,489.42,277.82,211.6,True,1.39,
 AMZN,2025,,2069861,13205807,220706246,277089824,142,,,,6.38,CEO_TRANSITION
+AON,2025,Gregory C. Case,73742639,82231585,163147232,275412311,174,203,-29.0,False,1.12,
+MSI,2025,Gregory Q. Brown,34453481,-34855292,134482486,274675113,239.54,241.63,-2.1,False,-1.01,
+APH,2025,R. Adam Norwitt.,22351288,141580126,77501125,271476539,432.58,236.57,196.0,True,6.33,
+IRM,2025,William L. Meaney,17047480,21943637,82469886,262916469,347.18,137.53,209.7,True,1.29,
+MNST,2025,,19282630,56281111,167592837,262709032,166,124,42.0,True,2.92,CEO_TRANSITION
+VRT,2025,Mr. Albertazzi,18311719,102015794,49985994,262300979,871.48,189.1,682.4,True,5.57,
 XOM,2025,D.W. Woods,32998628,60042706,173452782,262276549,356,228,128.0,True,1.82,
+CVNA,2025,Mr. Garcia,8382555,110136005,36077397,261527074,176.18,150.08,26.1,True,13.14,
 RTX,2025,Christopher T. Calio,24846826,88622978,125304673,261494093,287.64,230.45,57.2,True,3.57,CEO_TRANSITION
 C,2025,Ms. Fraser,95757800,144786188,209003616,260868400,226.34,203.47,22.9,True,1.51,CEO_TRANSITION
 INTU,2025,Sasan K. Goodarzi,36845552,61856382,152827435,259440780,264.44,268.74,-4.3,False,1.68,
+PLD,2025,Mr. Moghadam,24999873,80571565,173797493,257703083,147.42,137.53,9.9,True,3.22,
+HWM,2025,John C. Plant,70547718,134793953,126442197,254974014,728.18,230.45,497.7,True,1.91,CEO_TRANSITION
 V,2025,McInerney,31560660,55819305,168935393,253053635,176.94,245.77,-68.8,False,1.77,CEO_TRANSITION
 COF,2025,Mr. Fairbank,64971137,94125501,172452644,251982723,268.21,203.47,64.7,True,1.45,
 WMT,2026,Doug McMillon,29240930,36488421,134596095,247975380,272.28,164.12,108.2,True,1.25,
 UBER,2025,Mr. Khosrowshahi,35595826,66651137,143467459,245838314,160.22,258.38,-98.2,False,1.87,
+MCK,2026,Brian S. Tyler,24213044,48925847,101745708,243897593,456.33,136.77,319.6,True,2.02,
+MRVL,2026,Mr. Murphy,25064348,-69708823,140340331,243888992,156.47,293.24,-136.8,False,-2.78,
+HLT,2025,Mr. Nassetta,27674400,38013198,129007017,240588813,261.39,226.60,34.8,True,1.37,
 KO,2025,James Quincey,31208165,61649669,131659754,236525246,148,113,35.0,True,1.98,
+AMP,2025,Mr. Cracchiolo,30828468,33081532,131427801,236147532,272,203,69.0,True,1.07,
+HCA,2025,Hazen,26456606,78235064,106844713,236124415,296.34,148.36,148.0,True,2.96,
+CB,2025,Evan G. Greenberg,33180582,58465778,139313247,235719661,219.13,228.54,-9.4,False,1.76,
 GM,2025,Ms. Barra,29895868,87783000,145356260,234122797,202,149,53.0,True,2.94,
-BNY,2025,Robin Vince,83472970,118040693,163021721,232402564,315.84,203.47,112.4,True,1.41,CEO_TRANSITION
+BNY,2025,,83472970,118040693,163021721,232402564,315.84,203.47,112.4,True,1.41,CEO_TRANSITION
+TRV,2025,Mr. Schnitzer,26968756,55596018,113684420,232169633,228.51,223.20,5.3,True,2.06,
+PH,2025,Jennifer A. Parmentier,19317705,45272113,108597330,230182975,408.78,233.00,175.8,True,2.34,CEO_TRANSITION
+TECH,2025,,8151181,2471713,79426115,228265242,79.49,103.58,-24.1,False,0.3,CEO_TRANSITION
+COHR,2025,James R. Anderson,3722935,34479371,170654207,224797111,188.92,162.71,26.2,True,9.26,CEO_TRANSITION
 CSCO,2025,R. Scott Herren,52838751,94076610,178615744,223427555,172.19,292.59,-120.4,False,1.78,
 IBM,2025,Mr. Krishna,37989685,83586950,117662827,221201567,303,210,93.0,True,2.2,
-UNH,2025,Hemsley/Witty (transition),60938062,56498799,185930927,217100686,102,148,-46.0,False,0.93,CEO_TRANSITION
+DAL,2025,Edward H. Bastian,19222401,105500600,102520605,220971355,177,88,89.0,True,5.49,
+ANET,2025,,2872145,26188077,54113054,220793370,721,163,558.0,True,9.12,
+ADI,2025,Vincent Roche,27456265,54018907,128359133,217222882,215.75,274.22,-58.5,False,1.97,
+PWR,2025,"Earl C. Austin, Jr.",15699684,63353478,68956582,217188136,591.12,280.39,310.7,True,4.04,
+VST,2025,James A. Burke (PEO),15989188,40719971,69166572,217179313,912.44,159.06,753.4,True,2.55,CEO_TRANSITION
+UNH,2025,,60938062,56498799,185930927,217100686,102,148,-46.0,False,0.93,CEO_TRANSITION
+CEG,2025,Mr. Dominguez,17115179,78753450,58956610,216883385,734,162,572.0,True,4.6,
+TRGP,2025,Matthew J. Meloy,21470708,31013211,81072613,216317243,769.9,346.67,423.2,True,1.44,
 TMO,2025,Mr. Casper,79923350,116091264,178792885,216150470,126.05,156.63,-30.6,False,1.45,
+NDAQ,2025,Adena T. Friedman,25014550,59054224,113042670,214844719,235,197,38.0,True,2.36,
 GEV,2025,Scott Strazik,18020345,119347311,42346683,213086612,468,128,340.0,True,6.62,
+PGR,2025,Mrs. Griffith,17705924,25770278,76931843,210790712,254.12,228.85,25.3,True,1.46,
 GILD,2025,Mr. O’Day,28437198,63256337,115584999,209976102,255,125,130.0,True,2.22,
+TJX,2026,Mr. Herrman,26603537,47445659,124636202,209869799,251.93,209.16,42.8,True,1.78,
+RJF,2025,,21070760,54364869,127628624,209259972,380.95,290.78,90.2,True,2.58,CEO_TRANSITION
+PCG,2025,,19812481,7193982,191130896,206020175,130,145,-15.0,False,0.36,CEO_TRANSITION
 COP,2025,Mr. Lance,23450085,22778058,111196021,205309779,279.04,285.59,-6.5,False,0.97,
+TT,2025,Mr. Regnery,27262157,28107983,122244261,203961916,286,189,97.0,True,1.03,CEO_TRANSITION
+AZO,2025,,9636414,21265131,75426724,201243834,353.08,151.97,201.1,True,2.21,CEO_TRANSITION
 GD,2025,Novakovic,25924082,51230765,117333588,200036746,253,230,23.0,True,1.98,
+TKO,2025,Ariel Emanuel,67361782,102000000,150403613,200000000,213.23,204.86,8.4,True,1.51,
 BLK,2025,Mr. Fink,37749569,55823885,160771033,198690043,,,,,1.48,
+MAR,2025,Mr. Capuano,22970926,39528666,116954190,196356029,243.83,226.6,17.2,True,1.72,CEO_TRANSITION
+MPC,2025,"2025: Ms. Mannen•2024: Ms. Mannen (top row), who was promoted to the CEO role effective August 1, 2024, and Mr. Hennigan (bottom row), who transitioned from the CEO role to Executive Chairman on that date •2023, 2022 and 2021: Mr. Hennigan",19016261,22476265,123688461,196307908,448.38,329.43,118.9,True,1.18,CEO_TRANSITION
+COR,2025,Robert P. Mauch,18256227,33887631,85852205,194974111,341.68,143.51,198.2,True,1.86,
 BAC,2025,Brian T. Moynihan,33711521,53507725,144928087,194322711,205,196,9.0,True,1.59,
 PM,2025,Mr. Olczak,29072171,56821594,116472387,194031529,247.10,128.30,118.8,True,1.95,CEO_TRANSITION
 SO,2025,Christopher C. Womack,28223562,26123940,154349816,190919373,171.34,153.04,18.3,True,0.93,CEO_TRANSITION
@@ -208,51 +254,383 @@ SBUX,2025,,30992773,3634603,207832151,190162446,110.47,165.21,-54.7,False,0.12,C
 SPG,2025,David Simon,11663678,31738170,134765730,190116661,283,174,109.0,True,2.72,
 NEE,2025,Mr. Ketchum,24192607,37973057,149078490,189057736,118.24,146.25,-28.0,False,1.57,CEO_TRANSITION
 LRCX,2025,Timothy M. Archer,28298161,14697241,109180193,189022455,340,307,33.0,True,0.52,
+MRSH,2025,John Q. Doyle,25051051,11535337,119357684,187996610,171,203,-32.0,False,0.46,
+JBL,2025,,16092334,33288152,92128852,186811440,611.94,182.29,429.7,True,2.07,CEO_TRANSITION
+DHI,2025,,25128033,21368977,142925417,186472722,235.46,214.30,21.2,True,0.85,
+UAL,2025,Scott Kirby,32282253,45643992,104422206,186439714,258.54,87.62,170.9,True,1.41,
+RCL,2025,Mr. Jason Liberty,23978813,48985531,87569200,184532672,380.05,152.06,228.0,True,2.04,CEO_TRANSITION
+IQV,2025,Ari Bousbib,28128245,36068712,142763875,184194794,125.81,186.82,-61.0,False,1.28,
+FISV,2025,,70341992,20838113,186648228,183773622,59,203,-144.0,False,0.3,CEO_TRANSITION
 PG,2025,Mr. Moeller,21909816,15425410,126801100,183028794,150.71,170.04,-19.3,False,0.7,CEO_TRANSITION
+CBRE,2025,Robert E. Sulentic,24325039,45581677,104060245,181218444,256.36,168.39,88.0,True,1.87,
+NOC,2025,,25400000,46100000,115100000,179500000,203.19,212.68,-9.5,False,1.81,
+BSX,2025,Michael F. Mahoney,23532050,32971714,96682586,179459578,265.23,148.36,116.9,True,1.4,
 LIN,2025,Sanjiv Lamba,21777870,15934321,108064106,179232097,173.35,138.87,34.5,True,0.73,CEO_TRANSITION
+RL,2026,Mr. Louvet,23264269,62764477,95996686,177091771,297.74,58.52,239.2,True,2.7,
+AFL,2025,Daniel P. Amos,25033687,38988251,96509718,176639226,278.50,201.00,77.5,True,1.56,
 DIS,2025,Mr. Iger,45842574,63461475,185131443,175658435,94.13,224.99,-130.9,False,1.38,CEO_TRANSITION
+EBAY,2025,Mr. Iannone,28463890,74378139,109009636,175600708,189.15,258.38,-69.2,False,2.61,
+VRTX,2025,Reshma Kewalramani,21144261,38218069,94340723,173902554,191.83,124.75,67.1,True,1.81,
+HIG,2025,Christopher Swift,22114212,48028798,89776627,173767406,312,210,102.0,True,2.17,
+AJG,2025,Pat Gallagher,20745060,31447358,81767505,173208302,91.98,93.06,-1.1,False,1.52,
 QCOM,2025,Cristiano R. Amon,29701097,29635405,111896596,171750319,164,229,-65.0,False,1.0,CEO_TRANSITION
+PSX,2025,Mr. Lashier,23113403,32433844,120581604,169567096,224.57,342.94,-118.4,False,1.4,CEO_TRANSITION
+ADP,2025,Ms. Black,19137192,31938998,102862717,168861793,229.88,196.20,33.7,True,1.67,CEO_TRANSITION
+OMC,2025,John Wren,69865846,67924486,152350944,168857203,154.22,224.01,-69.8,False,0.97,
 CVX,2025,Mr. Wirth,26828240,17696603,133733862,168456979,222,275,-53.0,False,0.66,
+ETN,2025,,13974141,-16187601,98764979,168248248,288,175,113.0,True,-1.16,CEO_TRANSITION
+CARR,2025,Mr. Gitlin,14962913,-27792296,126507420,168143968,149,173,-24.0,False,-1.86,
+ALL,2025,Mr. Wilson,22920898,45082152,100225071,167748764,214,214,0.0,False,1.97,
+CAH,2025,,18976195,72784925,92888774,167696695,371,134,237.0,True,3.84,CEO_TRANSITION
+WAB,2025,Rafael Santana,26181461,45529360,85361730,166129942,300,179,121.0,True,1.74,
 MA,2025,Mr. Miebach,35422518,35653703,128447096,165775897,165,203,-38.0,False,1.01,CEO_TRANSITION
+JCI,2025,,19963827,33407820,99333034,165348980,299,208,91.0,True,1.67,CEO_TRANSITION
+TEL,2025,Terrence Curtin,18325536,66647241,82530693,164784964,247.03,288,-41.0,False,3.64,
+LHX,2026,Mr. Kubasik,25617590,59464701,114400793,163449339,178.36,237.57,-59.2,False,2.32,CEO_TRANSITION
+FOXA,2025,Mr. L.K. Murdoch,32980954,66319496,127988961,163376926,224,157,67.0,True,2.01,
+FOX,2025,Mr. L.K. Murdoch,32980954,66319496,127988961,163376926,224,157,67.0,True,2.01,
 DE,2025,Mr. May,27925424,14950301,122662592,161587740,217.99,221.76,-3.8,False,0.54,
+TPR,2025,Joanne Crevoiserat,17340349,77657770,73638160,160872550,780,101,679.0,True,4.48,CEO_TRANSITION
 SCHW,2025,Walter W. Bettinger II,18755222,27233933,115340258,160323422,201,231,-30.0,False,1.45,
+FCX,2025,Kathleen L. Quirk,14808126,24358128,115489775,159872763,208.56,330.58,-122.0,False,1.64,CEO_TRANSITION
+EQT,2025,Mr. Toby Z. Rice,16087233,25997564,66463580,159058673,448.69,323.98,124.7,True,1.62,
+CIEN,2025,Mr. Smith,18530396,94502099,71507410,158651807,482.15,271.04,211.1,True,5.1,
+NUE,2025,Leon J. Topalian,14945471,27574194,91161375,157499801,331,342,-11.0,False,1.84,
 JNJ,2025,J. Duato,32758111,68275237,125299157,157425228,151.55,188.57,-37.0,False,2.08,CEO_TRANSITION
+VLO,2025,R. Lane Riggs,34228523,31442695,149660258,157014565,346.01,251.49,94.5,True,0.92,CEO_TRANSITION
+IR,2025,Mr. Reynal,16197391,-30164108,114330563,156806244,174.76,189.72,-15.0,False,-1.86,
+WDC,2025,,24931456,42539122,114418991,155685959,198,352,-154.0,False,1.71,CEO_TRANSITION
+IT,2025,Mr. Hall,19226580,-7029765,83426668,155459311,158,130,28.0,True,-0.37,
 T,2025,John Stankey,29906872,43038808,130504279,155080641,155,213,-58.0,False,1.44,
+SYK,2025,Mr. Lobo,21401495,24776477,99071823,154702448,151.03,148.36,2.7,True,1.16,
+SPGI,2025,Martina Cheung,12831062,16625418,108673392,154163921,166,155,11.0,True,1.3,CEO_TRANSITION
 EMR,2025,S. L. Karsanbhai,21240262,37115801,105704644,154099861,225.78,217.50,8.3,True,1.75,CEO_TRANSITION
+F,2025,"James D. Farley, Jr.",27519558,49214346,122660777,151690144,197,149,48.0,True,1.79,
+GLW,2025,Wendell P. Weeks,25756121,61628148,100005711,150347967,279.06,249.73,29.3,True,2.39,
+EQIX,2025,Ms. Fox-Martin,22654885,11908291,152063485,150319080,118.10,123.88,-5.8,False,0.53,CEO_TRANSITION
+HAL,2025,Jeffrey A. Miller,16525407,18843234,101757441,150175557,163.76,181.72,-18.0,False,1.14,
 AMGN,2025,Mr. Bradway,24693120,49378868,114886152,149840535,166.63,192.38,-25.8,False,2.0,
-NKE,2025,,28442712,-10924243,178194134,145698528,65.09,81.16,-16.1,False,-0.38,CEO_TRANSITION
+CCL,2025,Josh Weinstein,18887776,37060165,90485358,148968893,129.03,196.57,-67.5,False,1.96,CEO_TRANSITION
+PTC,2025,Mr. Barua,24315129,22858151,95720227,148655462,245.43,284.85,-39.4,False,0.94,CEO_TRANSITION
+CNP,2025,Jason Wells,12092341,24629013,89662193,148372576,201.5,130.1,71.4,True,2.04,CEO_TRANSITION
+NWSA,2025,Mr. Thomson,20623729,24422935,102999460,144731571,269,103,166.0,True,1.18,
+NWS,2025,Mr. Thomson,20623729,24422935,102999460,144731571,269,103,166.0,True,1.18,
+IBKR,2025,Mr. Milan Galik,19669486,42156235,78713531,143350602,434,196,238.0,True,2.14,
+BKR,2025,Mr. Simonelli,21363825,33415063,95185250,141041259,248,165,83.0,True,1.56,
 MMM,2025,William M. Brown,21005009,35738149,108065582,140542766,132,173,-41.0,False,1.7,CEO_TRANSITION
+EL,2025,,17793402,6575426,158546767,139704849,45.86,170.04,-124.2,False,0.37,CEO_TRANSITION
+ICE,2025,Mr. Sprecher,22133386,28617998,100697213,138897450,149.78,141.57,8.2,True,1.29,
+CME,2025,Terrence A. Duffy,23394854,38204401,116676257,138556749,181.29,164.59,16.7,True,1.63,
+ACGL,2025,Mr. Papadopoulo,14626320,27474443,90345984,138101303,279.66,234.32,45.3,True,1.88,CEO_TRANSITION
 DUK,2025,,13652630,15135448,101569918,138085614,156,153,3.0,True,1.11,CEO_TRANSITION
 MRK,2025,Mr. Davis,20797845,15760172,111826330,137381373,158.08,198.33,-40.2,False,0.76,CEO_TRANSITION
 MCD,2025,Mr. Kempczinski,20574525,17916531,95723435,137246381,160,173,-13.0,False,0.87,
+WM,2025,"Mr. James C. Fish, Jr.",19048786,27485198,78652807,135935971,202,196,6.0,True,1.44,
+PNC,2025,William S. Demchak,29503081,35678671,109509487,135652969,167.9,196,-28.1,False,1.21,
+BG,2025,,18945479,24536788,87393615,135198965,155,101,54.0,True,1.3,
 ISRG,2025,,20997480,26375695,88142716,134646433,287.42,102.99,184.4,True,1.26,CEO_TRANSITION
+FANG,2025,,20502775,16582404,105023261,134204263,383.98,269.59,114.4,True,0.81,CEO_TRANSITION
+DDOG,2025,Mr. Pomel,27055482,50088037,78424849,133896166,360,388,-28.0,False,1.85,
+STX,2025,William D. Mosley,17176927,57393073,67096369,133840249,358,229,129.0,True,3.34,
+INCY,2025,,32085952,54707801,103699182,133362998,113.55,119.92,-6.4,False,1.71,CEO_TRANSITION
 PEP,2025,Ramon L. Laguarta,23903545,1401981,140519351,133215965,112.86,111.09,1.8,True,0.06,
+ULTA,2026,Kecia L. Steelman,15403663,33853098,75906908,132658916,231.4,158.51,72.9,True,2.2,CEO_TRANSITION
+TXT,2025,Mr. Donnelly,21165556,24044049,95144589,132367324,181.1,237.6,-56.5,False,1.14,
+STLD,2025,Mr. Mark Millett,12059908,24225255,57900831,132310250,498,369,129.0,True,2.01,
 LOW,2026,Mr. Ellison,21581889,24847325,95252794,132114182,175.63,164.12,11.5,True,1.15,
+DGX,2025,James E. Davis,15498479,26510389,84696184,131996900,160.65,148.37,12.3,True,1.71,CEO_TRANSITION
 ACN,2025,Ms. Sweet,29641903,16552177,142894454,131536242,117,251,-134.0,False,0.56,
 TXN,2025,Mr. Ilan,22669509,17392255,119647380,131276563,121.78,258.38,-136.6,False,0.77,CEO_TRANSITION
 PFE,2025,Bourla,27585301,33705501,131166764,130918964,86,187,-101.0,False,1.22,
+MOS,2025,Bruce M. Bodine,10410935,10983095,56532909,130764216,116.32,138.87,-22.6,False,1.05,
 META,2025,Mark Zuckerberg,25125904,25125904,130679225,130679225,243.32,445.33,-202.0,False,1.0,
-ADBE,2025,Shantanu Narayen,51173935,-17392652,216225731,129912920,67.11,187.96,-120.9,False,-0.34,
+FTNT,2025,Ken Xie,11458039,1145113,69306605,129944073,267.28,258.44,8.8,True,0.1,
+ADBE,2025,,51173935,-17392652,216225731,129912920,67.11,187.96,-120.9,False,-0.34,
+NVR,2025,,1748563,-9128987,72159721,128494426,178.8,214.6,-35.8,False,-5.22,CEO_TRANSITION
 VZ,2025,,34311016,34137740,153951000,127209018,93.65,213.25,-119.6,False,0.99,CEO_TRANSITION
+HPE,2025,Mr. Neri,23482721,30748204,101379247,125531442,329,319,10.0,True,1.31,
+LULU,2025,Calvin McDonald,14551916,2215177,70566091,125484001,173.02,56.14,116.9,True,0.15,
+YUM,2025,,20861526,24292446,120187718,125094634,153,154,-1.0,False,1.16,CEO_TRANSITION
+MET,2025,Mr. Khalaf,22364273,13805007,97940260,125041587,195.93,201.00,-5.1,False,0.62,
+KEYS,2025,Mr. Dhanasekaran,18020109,22733067,88996066,124853628,174.46,318.88,-144.4,False,1.26,CEO_TRANSITION
 ABT,2025,Robert B. Ford,24198660,26833361,116880944,123445135,125,148,-23.0,False,1.11,
+CPRT,2025,,2072692,-1937010,39157407,123193687,194.45,135.38,59.1,True,-0.93,CEO_TRANSITION
+ADM,2025,Juan Luciano,23886978,10686678,118129559,122917100,131.07,214.08,-83.0,False,0.45,
+CTAS,2025,Todd M. Schneider,9249676,34558802,42429899,122841781,384.67,203.00,181.7,True,3.74,
 LMT,2025,Taiclet,23453308,19116609,112942753,122732910,156.36,230.49,-74.1,False,0.82,
+LH,2025,Adam H. Schechter,18339913,30129512,89125524,122596807,150,148,2.0,True,1.64,
+MLM,2025,C. Howard Nye,14264065,25741013,78193551,122472928,226.27,138.87,87.4,True,1.8,
+MSCI,2025,Henry A. Fernandez,33320590,19771649,86147470,122249547,135.2,208.4,-73.2,False,0.59,
 HON,2025,Vimal Kapur,20381435,10865674,127627344,121185625,107.80,189.10,-81.3,False,0.53,CEO_TRANSITION
+ITW,2025,Christopher A. O’Herlihy,15211011,14920823,91673325,121149911,135.62,192.4,-56.8,False,0.98,
+SNPS,2025,Sassine Ghazi,19605963,-15589671,99024477,120911383,212.2,318.9,-106.7,False,-0.8,CEO_TRANSITION
 USB,2025,,19054648,21253618,113309237,120731827,142,196,-54.0,False,1.12,CEO_TRANSITION
+PHM,2025,Mr. Marshall,15393266,24268797,76994921,120451116,285.70,183.73,102.0,True,1.58,
+ROP,2025,L. Neil Hunn,26205765,3919379,134613392,120302136,106,258,-152.0,False,0.15,
+LITE,2025,,46407285,46661132,121153592,119343097,124.46,199.56,-75.1,False,1.01,CEO_TRANSITION
+ON,2025,,17678866,5241414,98120821,119264548,165,268,-103.0,False,0.3,
+RSG,2025,Mr. Vander Ark,14857016,14865606,71817079,119041287,234.13,131.58,102.5,True,1.0,CEO_TRANSITION
+PRU,2025,,18631646,16746913,117315000,118832291,184,201,-17.0,False,0.9,CEO_TRANSITION
+SLB,2025,Mr. Le Peuch,17347291,17486818,85416999,118274197,195.72,192.26,3.5,True,1.01,
+EA,2025,Andrew Wilson,30529835,29242935,135856289,117728179,148,221,-73.0,False,0.96,
+J,2025,,14038363,14757687,74381483,117579956,201,146,55.0,True,1.05,CEO_TRANSITION
+LVS,2025,Mr. Goldstein,31109661,27592092,123299351,117379436,114,82,32.0,True,0.89,CEO_TRANSITION
+ELV,2025,Gail Boudreaux,22582314,18785570,105222651,116739354,117,148,-31.0,False,0.83,
+CASY,2025,Mr. Rebelez,10680000,40743000,49160000,115824000,315,173,142.0,True,3.81,
+AEP,2025,,36608524,44766056,106177316,115450849,166.24,166.34,-0.1,False,1.22,CEO_TRANSITION
+CMI,2025,Jennifer W. Rumsey,19905532,37319088,88909090,115428960,253.8,207.9,45.9,True,1.87,CEO_TRANSITION
+OXY,2025,Vicki Hollub,18055969,11322463,80364098,115039923,252,268,-16.0,False,0.63,
+JBHT,2025,,0,13097307,46619767,114801104,148.91,162.46,-13.6,False,,CEO_TRANSITION
+STT,2025,Mr. O’Hanley,19529070,43149556,81812480,114731173,206.6,196,10.6,True,2.21,
+TSN,2025,Donnie King,34469569,31914312,105917418,114615791,106.07,149.94,-43.9,False,0.93,CEO_TRANSITION
+CI,2025,David M. Cordani,22866134,14585303,108002255,114404349,144.513,148.362,-3.8,False,0.64,
+FFIV,2025,Mr. Locoh-Donou,23039819,44505157,76234614,114238882,263.25,284.85,-21.6,False,1.93,
+ADSK,2026,Andrew Anagnost,30091165,24447086,115630235,113886478,91.15,133.77,-42.6,False,0.81,
+GEN,2025,Vincent Pilette,22510196,33544036,90511467,113463879,161,310,-149.0,False,1.49,
+NCLH,2025,Harry Sommer,13752560,15461282,88679888,113007368,87.77,144.95,-57.2,False,1.12,CEO_TRANSITION
+OTIS,2025,Ms. Marks,16977877,9537971,103252509,112725721,139,190,-51.0,False,0.56,
+ROST,2026,James G. Conroy,17406705,29424552,79820604,112321187,179,209,-30.0,False,1.69,
+CRH,2025,Mr. Manifold.,17841808,29683003,56660577,112291525,262.13,109.10,153.0,True,1.66,
 CMCSA,2025,Mr. Roberts,35148413,13692402,170532132,111062744,65.57,96.29,-30.7,False,0.39,
+GL,2025,,9453935,15976152,84227286,110981754,154,201,-47.0,False,1.69,CEO_TRANSITION
+HSY,2025,,16806399,18390725,90163617,110286546,135,98,37.0,True,1.09,CEO_TRANSITION
+GDDY,2025,Mr. Bhutani,23017010,-21622349,92295940,109275268,149.58,118.22,31.4,True,-0.94,
+ETR,2025,Mr. Marsh,16752589,21835264,77087031,108482411,222.60,153.04,69.6,True,1.3,CEO_TRANSITION
+PFG,2025,,13827887,15267075,88076242,107655158,212.98,203.47,9.5,True,1.1,CEO_TRANSITION
 MDLZ,2025,Mr. Van de Put,24516114,8052850,101893009,107543901,104.41,115.32,-10.9,False,0.33,
+EFX,2025,Mark W. Begor,23420134,-3703962,104579269,107431922,116.66,169.26,-52.6,False,-0.16,
 CRM,2026,Marc Benioff,49379252,-49207128,252154299,107153714,94.12,256.61,-162.5,False,-1.0,CEO_TRANSITION
+NTAP,2025,George Kurian,23127224,4745188,85469606,107004589,234.64,272.4,-37.8,False,0.21,
+CMG,2025,Scott Boatwright,15455736,-16022852,114273340,106990029,133,124,9.0,True,-1.04,CEO_TRANSITION
+CSX,2025,,23696453,15790960,112724707,106785894,128,190,-62.0,False,0.67,CEO_TRANSITION
 HD,2026,,16191127,12120694,82885459,106709911,156.3,164.1,-7.8,False,0.75,CEO_TRANSITION
+ZBRA,2025,,13890300,6427632,104850846,106373037,63.18,258.38,-195.2,False,0.46,CEO_TRANSITION
+VMC,2025,Mr. Hill,14699497,21798649,61592656,106095644,200.02,130.99,69.0,True,1.48,
 BA,2025,,23581389,31921725,133555937,105344608,101,230,-129.0,False,1.35,CEO_TRANSITION
+ARE,2025,,11572796,4293016,132626430,104865854,33.8,164.5,-130.7,False,0.37,CEO_TRANSITION
+IVZ,2025,,16299849,36278513,84822838,104765019,186,181,5.0,True,2.23,CEO_TRANSITION
 FDX,2025,Mr. Subramaniam,12873691,7273193,63427708,104726381,182.43,175.85,6.6,True,0.56,
 COST,2025,Ron M. Vachris,13932597,15633675,77792653,104726120,293.59,173.48,120.1,True,1.12,CEO_TRANSITION
+DOV,2025,Richard Tobin,18757706,15034170,83012449,104139487,165,190,-25.0,False,0.8,
+NXPI,2025,,14736019,12209362,101579989,103890880,148.94,268.22,-119.3,False,0.83,CEO_TRANSITION
+CF,2025,Mr. Will,13711938,15597638,64872277,103877252,222.57,147.62,74.9,True,1.14,
+HPQ,2025,Enrique Lores,23103812,9882169,103736187,103528288,181.93,318.88,-136.9,False,0.43,
+HST,2025,James F. Risoleo,14835223,23444743,74955400,102240311,146.56,115.35,31.2,True,1.58,
+MCO,2025,,18082565,26294538,70806596,101938301,183,216,-33.0,False,1.45,
+SYY,2025,Kevin P. Hourican,16228599,13039770,82992869,101533498,164,232,-68.0,False,0.8,
+HAS,2025,Cocks,18672521,35332347,87182764,100861881,108.23,151.09,-42.9,False,1.89,CEO_TRANSITION
+CRL,2025,Mr. Foster,15435220,24913934,70159205,100337471,81,148,-67.0,False,1.61,
+VTR,2025,Debra A. Cafaro,17501073,40514474,73782636,100255727,187.19,164.51,22.7,True,2.31,
+PKG,2025,Mr. Kowlzan,16992255,12969392,72641862,100218702,173.59,113.51,60.1,True,0.76,
 MO,2025,"William F. Gifford, Jr",24561180,27713212,98705092,100060146,208.24,135.97,72.3,True,1.13,
+TSCO,2025,Harry A. Lawton III,32277194,24875183,77029895,100024425,190,159,31.0,True,0.77,
+WRB,2025,Mr. Rob Berkley,16823866,21149853,81862832,99935038,267.62,224.47,43.2,True,1.26,
+MGM,2025,Mr. Hornbuckle,25329156,25905860,87665133,99819835,115.86,81.82,34.0,True,1.02,
+TFC,2025,,14313770,15202106,79589076,98393194,129.86,196.02,-66.2,False,1.06,CEO_TRANSITION
+BR,2025,Timothy C. Gokey,17188658,30364453,63997312,98112943,209.37,141.56,67.8,True,1.77,
+CSGP,2025,Andrew C. Florance,36431936,33174602,144586931,97629402,112.39,122.51,-10.1,False,0.91,
+DD,2025,,16134250,18320887,99865865,97626795,169,190,-21.0,False,1.14,CEO_TRANSITION
+SRE,2025,Mr. Martin,22245589,11709926,114465348,97302372,163,159,4.0,True,0.53,
+DRI,2025,Ricardo Cardenas,13995870,31605527,56520353,97214598,307.28,169.56,137.7,True,2.26,
+EOG,2025,Mr. Yacob,17576636,10130594,79346413,95027149,268,282.89,-14.9,False,0.58,CEO_TRANSITION
+URI,2025,Mr. Flannery,12057571,19027354,61263950,94981133,360,175,185.0,True,1.58,
+APA,2025,John J. Christmann IV,13202517,20245175,67249493,94851553,196.81,295.11,-98.3,False,1.53,
+EXC,2025,Mr. Butler,15601905,24610264,94569622,94617393,173,153,20.0,True,1.58,CEO_TRANSITION
+SHW,2025,Heidi G. Petz,14914317,9307185,75782063,94118070,138.29,128.86,9.4,True,0.62,
+RMD,2025,Mr. Michael Farrell,14674543,29631927,64712554,94002574,134.38,149.50,-15.1,False,2.02,
+TER,2025,Gregory S. Smith,14107588,41136477,63793076,93035743,164.67,258.77,-94.1,False,2.92,CEO_TRANSITION
+AME,2025,,16462630,21276792,71665905,92721643,175,190,-15.0,False,1.29,
+FIS,2025,,22928412,21626368,149781648,92571167,52.55,104.70,-52.2,False,0.94,CEO_TRANSITION
 CL,2025,Noel Wallace,16478196,12342588,81755201,92543247,104.0,111.8,-7.8,False,0.75,
+DG,2026,Todd J. Vasos,8163197,19500388,70480831,92412061,79.72,208.9,-129.2,False,2.39,CEO_TRANSITION
+EME,2025,Anthony J. Guzzi,14380630,21445529,62607234,92183390,680.65,189.72,490.9,True,1.49,
+CHRW,2025,David P. Bozeman,11045949,25032037,71349486,91841168,192.75,138.77,54.0,True,2.27,CEO_TRANSITION
+UHS,2025,Marc D. Miller,16148937,27735374,70519628,91736012,163,284,-121.0,False,1.72,
+ECL,2025,Christophe Beck,17404935,25910127,66429221,91424389,128.15,138.87,-10.7,False,1.49,
+TRMB,2026,Robert G. Painter,19129944,26495081,83114644,91358601,117,258,-141.0,False,1.39,
 UPS,2025,,22878788,10260804,116918910,90940092,74.69,136.89,-62.2,False,0.45,
+COO,2025,Mr. White,16051141,1770870,67700565,90885796,67.09,103.97,-36.9,False,0.11,
+LDOS,2026,,14736385,28272642,69513968,90692567,186.30,127.32,59.0,True,1.92,CEO_TRANSITION
 MDT,2025,,21240058,26085386,100436884,90291009,97.82,148.62,-50.8,False,1.23,CEO_TRANSITION
+AIZ,2025,Keith W. Demmings,15221983,24201570,59207359,89687914,192.81,221.66,-28.8,False,1.59,
 DHR,2025,Rainer Blair,23795280,17340170,104154020,89665494,119,148,-29.0,False,0.73,
+HUBB,2025,Gerben W. Bakker,10346752,11636745,43568298,88607356,307.70,222.79,84.9,True,1.12,
+CTVA,2025,Mr. Magro,17499399,28549774,77660618,88339455,183,122,61.0,True,1.63,CEO_TRANSITION
+A,2025,Mr. McDonnell,12827236,14643258,87126577,88001193,148.32,193.57,-45.2,False,1.14,CEO_TRANSITION
+NKE,2026,Elliott Hill,36340876,19275855,181614302,87529539,36.47,48.36,-11.9,False,0.53,CEO_TRANSITION
+SWKS,2025,,24717041,3944043,117429193,87059514,59.29,586,-526.7,False,0.16,CEO_TRANSITION
+WTW,2025,Mr. Hess,12793605,21693892,69030719,86971018,167,137,30.0,True,1.7,
+NI,2025,Lloyd Yates,13197800,26178851,53201731,86678331,216,159,57.0,True,1.98,CEO_TRANSITION
+CBOE,2025,,18347037,22673566,73670266,86243636,289.12,175.55,113.6,True,1.24,CEO_TRANSITION
+CNC,2025,London,19506298,4646963,100149362,85763682,68.55,148.37,-79.8,False,0.24,CEO_TRANSITION
+PCAR,2025,R. P. Feight,12618865,12600886,76948243,85618117,229.33,248.17,-18.8,False,1.0,
+TGT,2026,Mr. Cornell,21830088,7813021,98864706,85362016,66.89,176.65,-109.8,False,0.36,
+BRO,2025,J. Powell Brown,8641088,-6030535,46049278,84444440,174,184,-10.0,False,-0.7,
+HUM,2025,Mr. Rechtin,18757075,18828255,96447980,84392136,65,108,-43.0,False,1.0,CEO_TRANSITION
+FE,2025,Brian X. Tierney,13448255,17913372,79977653,84260632,179.8,143.83,36.0,True,1.33,CEO_TRANSITION
+WEC,2025,Mr. Lauber,12188492,20871095,67471605,84103380,135.40,149.01,-13.6,False,1.71,CEO_TRANSITION
+KR,2026,,14037608,13883235,83600842,83797022,202.66,217.65,-15.0,False,0.99,CEO_TRANSITION
+VTRS,2025,Scott A. Smith,15273331,24703538,85357669,83349777,81.26,185.97,-104.7,False,1.62,CEO_TRANSITION
 BMY,2025,Dr. Chris Boerner,21879919,16862134,108628642,83105505,105,198,-93.0,False,0.77,CEO_TRANSITION
+XEL,2025,,15992859,28391485,81736475,82601848,130,144,-14.0,False,1.78,CEO_TRANSITION
+FTV,2025,,14405012,11285225,94082341,82488403,105.69,189.72,-84.0,False,0.78,CEO_TRANSITION
+EIX,2025,Mr. Pizarro,16544559,6807157,71790810,82450487,119,153,-34.0,False,0.41,
+DLR,2025,,21071498,21541551,97352138,81828407,131.91,137.53,-5.6,False,1.02,CEO_TRANSITION
+O,2025,Sumit Roy,16251931,24580885,71774776,81629488,120.47,126.71,-6.2,False,1.51,
+FITB,2025,,11052366,15775869,60236045,80925670,204.21,196.02,8.2,True,1.43,CEO_TRANSITION
+KMB,2025,Hsu,15320405,9210075,74826225,80593471,89.85,141.44,-51.6,False,0.6,
+PEG,2025,Mr. LaRossa,13866735,11342953,74601985,80336646,162.8,144.69,18.1,True,0.82,CEO_TRANSITION
+SOLV,2025,Bryan C. Hanson,20139981,40020576,60099748,80265560,114.67,108.95,5.7,True,1.99,
+KMI,2025,Ms. Dang,12331566,14282847,54282393,79406112,268.96,291.00,-22.0,False,1.16,CEO_TRANSITION
+CPAY,2025,(1)Mr. Clarke,3406867,2722552,96037360,79060447,110.30,132.06,-21.8,False,0.8,
+GWW,2025,D.G. Macpherson,11609508,9107336,51635122,78464790,261,231,30.0,True,0.78,
+MCHP,2026,Steve Sanghi,40501951,47170072,102302406,78439492,92.34,256.74,-164.4,False,1.16,CEO_TRANSITION
+CCI,2025,,18218454,8879235,123399117,78299223,70.38,126.71,-56.3,False,0.49,CEO_TRANSITION
+IP,2025,Mr. Silvernail,14838324,-8657205,92593242,78026911,104,127,-23.0,False,-0.58,CEO_TRANSITION
+GPN,2025,Cameron Beady,20307392,6476989,121094289,77833679,37.54,203.47,-165.9,False,0.32,CEO_TRANSITION
+ROK,2025,Blake D. Moret,15401707,25161026,73102519,77727849,172.60,226.14,-53.5,False,1.63,
+PODD,2025,,18858968,25206415,94016906,77277559,111.19,99.39,11.8,True,1.34,CEO_TRANSITION
+NTRS,2025,Mr. O’Grady,10059154,21643405,52429572,76612418,170.76,196.00,-25.2,False,2.15,
+HII,2025,Christopher D. Kastner,13809406,31037552,61555270,76430981,223,220,3.0,True,2.25,CEO_TRANSITION
+KIM,2025,Conor Flynn,11581750,9726025,58580155,76427967,167,176,-9.0,False,0.84,
+TROW,2025,Mr. Sharps,17245792,16007907,80443495,76418532,84.14,206.36,-122.2,False,0.93,
+VEEV,2026,Mr. Gassner,470833,-88092167,174069833,76302833,73.77,125.07,-51.3,False,-187.1,
+PNR,2025,John Stauch,11374255,14499234,49365499,75976188,209.48,200.35,9.1,True,1.27,
+HBAN,2025,Stephen D. Steinour,12124358,18340287,52433653,75892424,172,196,-24.0,False,1.51,
+DXCM,2025,,16282598,12992295,83230575,75769038,71.81,78.69,-6.9,False,0.8,CEO_TRANSITION
+DTE,2025,,14156937,12765598,65345918,75620079,147.24,144.61,2.6,True,0.9,CEO_TRANSITION
+BEN,2025,Ms. Johnson,16844816,21476332,75374618,75244707,144.34,272.77,-128.4,False,1.27,
+CFG,2025,Mr. Van Saun,12513920,21965302,58353851,74784337,202.1,196.0,6.1,True,1.76,
+BDX,2025,Thomas E. Polen,17129140,3475744,82654253,74427608,89.25,130.17,-40.9,False,0.2,
+CTSH,2025,Mr. Kumar,21532448,26662787,102745155,74327140,109.43,196.16,-86.7,False,1.24,CEO_TRANSITION
+DASH,2025,Tony Xu,431864,238464732,1667019,74051047,159,258,-99.0,False,552.18,
 UNP,2025,Mr. Vena,20296362,16803878,84360940,73502570,124,149,-25.0,False,0.83,CEO_TRANSITION
-BRK-B,2025,Warren E. Buffett,389488,389488,1982987,1982987,217.01,234.62,-17.6,False,1.0,`;
+BIIB,2025,Mr. Viehbacher,23646004,27664592,126686061,73078848,71.87,119.92,-48.0,False,1.17,CEO_TRANSITION
+DOW,2025,Jim Fitterling,19078777,-892309,103295866,72903801,55,79,-24.0,False,-0.05,
+FSLR,2025,Mr. Widmar,8138605,10361718,36001030,72358022,264,48,216.0,True,1.27,
+IFF,2025,Mr. J. Erik Fyrwald,15002866,7485213,95824140,72114793,71,110,-39.0,False,0.5,CEO_TRANSITION
+ALB,2025,"J. Kent Masters, Jr.",15513654,38198957,64513176,71873115,102,109,-7.0,False,2.46,
+PAYX,2025,John B. Gibson,8807411,16426552,58116891,71383106,251.16,186.69,64.5,True,1.87,CEO_TRANSITION
+IDXX,2025,Jonathan J. Mazelsky,14580122,31764374,57959891,71224949,135.34,148.36,-13.0,False,2.18,
+AVB,2025,Value of Initial Fixed $100,9663500,1583396,65920341,70988433,134,130,4.0,True,0.16,CEO_TRANSITION
+AVY,2025,Deon Stander,9538375,6257992,56704277,70875046,127.47,101.03,26.4,True,0.66,CEO_TRANSITION
+NRG,2025,Lawrence Coben,20131942,35537362,71664316,70805776,506.68,155.39,351.3,True,1.77,CEO_TRANSITION
+GIS,2025,Jeffrey L. Harmening,12492830,-751091,72773467,70222779,99.81,113.32,-13.5,False,-0.06,
+GEHC,2025,,18562794,19551725,73058723,70157294,136.20,121.98,14.2,True,1.05,
+WYNN,2025,Mr. Billings,15090901,24305795,80162842,69832441,145.6,93.85,51.8,True,1.61,CEO_TRANSITION
+NEM,2025,Mr. Palmer,15625168,46280998,66659042,69551899,195,330,-135.0,False,2.96,
+BXP,2025,Owen D. Thomas.,23047305,24466190,74800672,68466787,91.77,81.15,10.6,True,1.06,
+DECK,2025,,10051429,2465345,55031214,68380183,500.7,78.3,422.4,True,0.25,CEO_TRANSITION
+PPL,2025,Mr. Sorgi,13221331,15906018,57049686,68214164,150,144,6.0,True,1.2,
+APD,2025,,23418863,15415851,105499060,68036969,103,157,-54.0,False,0.66,CEO_TRANSITION
+CDW,2025,Ms. Leahy,15009507,9649263,54141186,67821331,109.72,182.33,-72.6,False,0.64,
+APTV,2025,Kevin P. Clark,19250277,24676355,86959864,67818159,58.4,170.48,-112.1,False,1.28,
+SNA,2026,Nicholas T. Pinchuk,10138217,5967577,50547342,67566736,228.88,189.72,39.2,True,0.59,CEO_TRANSITION
+ODFL,2025,Mr. Freeman,11615896,10595479,68438125,67002381,165,149,16.0,True,0.91,CEO_TRANSITION
+VRSK,2025,Lee M. Shavel,13540847,6493547,69814853,66308156,111.27,130.8,-19.5,False,0.48,CEO_TRANSITION
+VRSN,2025,Bidzos,15536674,24214787,63235612,66176145,113,258,-145.0,False,1.56,
+EXE,2025,Mr. Dell’Osso,9879106,14308783,51487964,65528256,308,193,115.0,True,1.45,CEO_TRANSITION
+CHD,2025,,9799678,4332429,53864153,65076105,102,109,-7.0,False,0.44,CEO_TRANSITION
+VICI,2025,Edward B. Pitoniak,14007585,11631436,57262396,64543897,143.15,137.55,5.6,True,0.83,
+MAS,2025,,6641952,6122716,55749811,64417332,116,83,33.0,True,0.92,CEO_TRANSITION
+KEY,2025,Mr. Gorman,11522025,16732685,59546466,64020445,160.05,161.11,-1.1,False,1.45,
+UDR,2025,Mr. Toomey,9933438,3581688,54244744,62254318,115.44,129.86,-14.4,False,0.36,
+FIX,2025,Mr. Lane,10620815,21202213,35322807,61197174,1814.51,219.76,1594.8,True,2.0,
+ALLE,2025,Mr. Stone,9155073,19480153,51521357,61142704,146.95,219.77,-72.8,False,2.13,CEO_TRANSITION
+HSIC,2025,Mr. Bergman,12013915,9776672,52701231,60826151,116,144,-28.0,False,0.81,
+AEE,2025,Mr. Lyons,14056510,17245319,49962138,60212925,148.2,159.1,-10.9,False,1.23,
+EXPD,2025,,9643863,13076863,50394747,59530899,165.92,148.84,17.1,True,1.36,CEO_TRANSITION
+AKAM,2025,Dr. Leighton,15954172,12405175,68338415,59527830,83,258,-175.0,False,0.78,
+ES,2025,"Joseph R. Nolan, Jr.",14987168,15201278,77098052,59022588,94,144,-50.0,False,1.01,CEO_TRANSITION
+EXR,2025,Joseph D. Margolis,14186887,6246134,58099555,58756176,136.00,137.83,-1.8,False,0.44,
+NSC,2025,Mark R. George,16245050,13376591,83977066,58365030,135,129,6.0,True,0.82,CEO_TRANSITION
+EW,2025,,17454255,21327530,74313936,58320670,93.45,126.87,-33.4,False,1.22,CEO_TRANSITION
+ED,2025,,19899971,14919003,70995550,58287169,164,159,5.0,True,0.75,
+PNW,2025,,8414652,8814543,47997741,57747479,138,144,-6.0,False,1.05,CEO_TRANSITION
+CINF,2025,Stephen M. Spray,5943492,7850104,47081201,57726166,211.47,221.65,-10.2,False,1.32,CEO_TRANSITION
+PSA,2025,"Joseph D. Russell, Jr.",9909777,2398542,47747889,57723795,139,127,12.0,True,0.24,
+MTD,2025,Patrick Kaltenbach,6741212,8798416,41547270,57619794,122.33,105.51,16.8,True,1.31,CEO_TRANSITION
+LII,2025,Alok Maskara,8434155,1717504,39351620,57078948,188.04,175.89,12.2,True,0.2,CEO_TRANSITION
+BLDR,2025,,8133324,4033290,48656087,56774559,252.12,194.02,58.1,True,0.5,CEO_TRANSITION
+MTB,2025,Mr. Jones,12015250,14887642,47350271,56392581,185.53,196,-10.5,False,1.24,
+DOC,2025,Mr. Brinker,10072994,3346104,67810958,56309670,69.25,126.72,-57.5,False,0.33,CEO_TRANSITION
+EQR,2025,Mr. Parrell,12759187,7088965,55205811,55874863,127.21,137.83,-10.6,False,0.56,
+AES,2025,,9153896,13430738,62129822,55178938,73,159,-86.0,False,1.47,
+LUV,2025,Robert E. Jordan,16587882,21865552,52680483,54698491,95,88,7.0,True,1.32,CEO_TRANSITION
+LYB,2025,,15577445,1216707,93970201,54363514,66.44,122.44,-56.0,False,0.08,CEO_TRANSITION
+GPC,2025,Mr. Stengel,12863479,13160136,54169241,54055710,140.38,120.57,19.8,True,1.02,
+WAT,2025,Dr. Batra,13973044,10649666,51926392,53987508,153.52,69.03,84.5,True,0.76,
+WY,2025,Mr. Stockfish,13983685,10318880,65643898,53700274,86.43,102.2,-15.8,False,0.74,
+CMS,2025,Rochow,10534039,12284421,46149920,53468911,131,166,-35.0,False,1.17,
+MKC,2025,Brendan M. Foley,10831581,9333256,62641199,53462794,79.77,102.38,-22.6,False,0.86,CEO_TRANSITION
+XYL,2025,Mr. Pine,11287000,13705000,53283000,53349000,149,189,-40.0,False,1.21,
+ALGN,2025,Joseph Hogan,19193988,3855982,115743022,53319434,29,117,-88.0,False,0.2,
+REG,2025,Ms. Palmer,11092432,11270326,45596833,52627683,184.91,182.01,2.9,True,1.02,
+FRT,2025,Mr. Wood,9929147,8370328,44548445,51697291,134.06,154.56,-20.5,False,0.84,
+EG,2025,,8952500,8550995,44773661,51649838,161.56,234.33,-72.8,False,0.96,
+MAA,2025,,5874989,8541387,43826566,51286581,130.43,129.69,0.7,True,1.45,CEO_TRANSITION
+BAX,2025,,29805182,14723645,102361875,51182721,26.50,148.36,-121.9,False,0.49,CEO_TRANSITION
+INVH,2025,Dallas B. Tanner,14096335,-577707,59331917,50847617,109.12,137.53,-28.4,False,-0.04,
+TYL,2025,"H. Lynn Moore, Jr.",8858370,5427418,38533765,50675052,104,157,-53.0,False,0.61,
+SBAC,2025,Brendan T. Cavanagh,11358715,10743291,54767182,50620052,73.54,82.6,-9.1,False,0.95,
+STZ,2026,William A. Newlands,14209126,10903642,71953561,50185760,80.28,166.86,-86.6,False,0.77,
+TAP,2025,,11137548,-1028805,56126346,50155339,122.07,100.87,21.2,True,-0.09,CEO_TRANSITION
+WST,2025,Eric M. Green,7190876,4115453,42381519,49375920,59,118,-59.0,False,0.57,
+ROL,2025,"Jerry E. Gahlhoff, Jr.",8966870,15266101,40101313,49246331,163,190,-27.0,False,1.7,
+STE,2026,,11508522,3321857,46532110,48988274,121.45,106.94,14.5,True,0.29,CEO_TRANSITION
+PPG,2025,Mr. Knavish,14885022,6644608,61149439,48361631,78,129,-51.0,False,0.45,
+ZTS,2025,Kristin C. Peck,19046509,2772228,78593153,47710969,79.52,188.27,-108.8,False,0.15,
+TPL,2024,Tyler Glover,7413075,25838742,27783708,47679852,403,217,186.0,True,3.49,
+DPZ,2025,Russell J. Weiner,10696081,8945334,45128474,47307866,118.24,137.5,-19.3,False,0.84,CEO_TRANSITION
+AOS,2025,,8495829,8329274,43009136,47291218,133,190,-57.0,False,0.98,CEO_TRANSITION
+RF,2025,J. Turner,10526012,13175416,48563172,47074446,171,168,3.0,True,1.25,
+GNRC,2025,Aaron P Jagdfeld,8809765,4503043,39520185,47017685,59.93,189.72,-129.8,False,0.51,
+CLX,2025,Ms.                                             Rendle,13333032,10448800,57468317,46257995,63.41,137.19,-73.8,False,0.78,CEO_TRANSITION
+D,2025,Mr. Blue,16037850,16650230,50177378,46134287,97,159,-62.0,False,1.04,
+EVRG,2025,Mr. Campbell,9537018,16639907,42080177,46010544,164,160,4.0,True,1.74,CEO_TRANSITION
+ATO,2025,J. Kevin Akers,9953274,16402906,43103080,45145942,125.63,121.42,4.2,True,1.65,
+RVTY,2025,Prahlad R. Singh,13809549,5799936,55104792,45083658,68.2,105.15,-37.0,False,0.42,
+AMCR,2025,Peter Konieczny,8458329,5072024,53086478,45007520,111.43,172.42,-61.0,False,0.6,CEO_TRANSITION
+AWK,2025,,7055667,7510597,45326828,44737586,93.81,158.66,-64.8,False,1.06,CEO_TRANSITION
+BBY,2026,Ms. Barry,17346126,2727364,76409141,43409739,74.07,164.12,-90.1,False,0.16,
+GRMN,2025,Clifton A. Pemble,7744354,7788412,30349861,43391350,190.56,153.99,36.6,True,1.01,
+ORLY,2025,Brad Beckham,4231108,5185669,31303237,43248890,302,150,152.0,True,1.23,CEO_TRANSITION
+BALL,2025,,13486942,4514573,69472793,42792636,60,100,-40.0,False,0.33,CEO_TRANSITION
+BF-B,2026,Mr. Whiting,25304881,19119723,69964783,42406590,37,152,-115.0,False,0.76,
+LNT,2025,Ms. Barton,8999073,10801804,43416827,42121587,147.98,143.83,4.1,True,1.2,
+NDSN,2025,Sundaram Nagarajan,8153900,7162573,42519431,41945729,127.44,207.29,-79.8,False,0.88,
+SNDK,2025,Mr. Goeckeler,22919536,40783700,22919536,40783700,94,108,-14.0,False,1.78,
+L,2025,Benjamin J. Tisch,8753165,11974575,35299865,40117002,277.70,287.03,-9.3,False,1.37,
+ECHO,2024,Mr. Akhavan.,8927865,16709964,35635105,39071243,52.84,111.11,-58.3,False,1.87,CEO_TRANSITION
+FDS,2025,Mr. Snow,9460930,5700082,35981160,38500862,111.53,231.96,-120.4,False,0.6,
+OKE,2025,Mr. Norton,12003335,-10179976,59460957,38040490,256.81,290.53,-33.7,False,-0.85,CEO_TRANSITION
+ESS,2025,Angela L. Kleiman,10096804,10260636,35349043,37884155,130.12,129.86,0.3,True,1.02,CEO_TRANSITION
+KHC,2025,Mr. Abrams-Rivera,10748810,6953641,46811289,37805483,86.97,201.42,-114.4,False,0.65,
+SJM,2026,Mark Smucker,10935216,5746789,52139344,37717954,88.48,91.55,-3.1,False,0.53,
+JKHY,2025,Mr. Adelson,7016992,7009055,46870204,37289339,103.95,215.9,-112.0,False,1.0,
+SWK,2026,,14485454,10261990,86897508,37038246,51,224,-173.0,False,0.71,CEO_TRANSITION
+VLTO,2025,,14803238,10546320,35728507,34617250,119.12,158.59,-39.5,False,0.71,
+HRL,2025,,7395224,3042889,48168287,34492916,55.66,103.27,-47.6,False,0.41,CEO_TRANSITION
+TDY,2025,,4255049,3871281,38373453,33059413,132,193,-61.0,False,0.91,CEO_TRANSITION
+CPT,2025,Richard J. Campo,8317514,8317514,32915576,32915576,130.26,137.83,-7.6,False,1.0,
+ZBH,2025,Mr. Tornos,16106550,12572570,85484843,32351994,62.66,126.87,-64.2,False,0.78,CEO_TRANSITION
+IEX,2025,Mr Ashleman,9112893,3042222,40458236,29170290,95,191,-96.0,False,0.33,
+KDP,2025,Timothy Cofer,8217032,5670304,66507448,27851378,99,105,-6.0,False,0.69,CEO_TRANSITION
+SW,2025,Mr. Smurfit,16429689,-726562,37758946,27170905,88.21,96.75,-8.5,False,-0.04,
+KVUE,2025,,10916848,-14971122,51301491,23497687,70.42,117.05,-46.6,False,-1.37,CEO_TRANSITION
+FAST,2025,Daniel L. Florness,4183328,4866551,16857946,21388278,185,219,-34.0,False,1.16,
+PYPL,2025,Mr. Chriss,25243486,-7470322,149985996,19555433,25,122,-97.0,False,-0.3,CEO_TRANSITION
+CHTR,2025,Mr. Winfrey,6466193,-46096708,197996511,19218304,32,127,-95.0,False,-7.13,CEO_TRANSITION
+Q,2025,Jon Kemp,20646678,15888457,20646678,15888457,84.24,93.84,-9.6,False,0.77,
+DELL,2026,Michael S. Dell,3382209,3382209,15781569,15781569,339.99,256.43,83.6,True,1.0,
+APO,2025,Marc Rowan,913367,913367,2966542,2966542,331,196,135.0,True,1.0,CEO_TRANSITION
+BRK-B,2025,Warren E. Buffett,389488,389488,1982987,1982987,217.01,234.62,-17.6,False,1.0,
+TTWO,2025,Strauss Zelnick,106457,106457,776889,776889,174.73,220.69,-46.0,False,1.0,
+DVN,2025,,12566,13660,75177,143994,292,242,50.0,True,1.09,CEO_TRANSITION
+XYZ,2025,Jack Dorsey,2,2,13,13,29.91,228.99,-199.1,False,1.0,
+DLTR,2026,Mr. Creedon,14775215,20883292,51358276,-17294736,115.67,167.91,-52.2,False,1.41,CEO_TRANSITION
+DVA,2025,Javier J. Rodriguez,18210597,18939532,53013434,-55160261,96.77,113.00,-16.2,False,1.04,
+ABNB,2025,Brian Chesky,242122,-89229878,1166958,-64341042,92.45,258.38,-165.9,False,-368.53,`;
 const CURATED = `ticker,company,ceo,payout_vs_target,metric_type,company_tsr,peer_tsr,note
 TSLA,Tesla,Musk,milestone options,equity_milestone,891,209,2018 performance award; $0 salary/bonus; equity-only
 PLTR,Palantir,Karp,service-based equity,service_equity,754.78,258.38,time-vesting RSUs/SARs not gated on financial targets; $8.6M granted to $11.1B realized
@@ -400,13 +778,13 @@ function renderLeague(){
       '<td>'+fmtFlag(d.flags)+'</td>';
     tb.appendChild(tr);
   });
-  document.getElementById('count').textContent=list.length+' of 98 companies'+(q?' (filtered)':'');
+  document.getElementById('count').textContent=list.length+' of 494 companies'+(q?' (filtered)':'');
 
   const top=[...league].filter(d=>payOf(d)!==null).sort((a,b)=>payOf(b)-payOf(a)).slice(0,3)
     .map(d=>(NAME[d.ticker]||d.ticker)+' '+fmtMoney(payOf(d))).join(' · ');
   const lead=basis==='granted'
-    ? 'The press quotes <b>granted</b> pay — the Summary Compensation Table figure.'
-    : '<b>Realized (CAP)</b> re-marks equity to the share price — the headline league table reorders.';
+    ? 'The press quotes <b>granted</b> pay, the Summary Compensation Table figure.'
+    : '<b>Realized (CAP)</b> re-marks equity to the share price, and the headline league table reorders.';
   document.getElementById('spot').innerHTML=lead+' Top by '+(basis==='granted'?'granted':'realized')+
     (period==='latest'?', latest FY':', 5-yr')+': '+top+'.';
 }
