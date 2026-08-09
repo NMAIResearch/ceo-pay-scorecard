@@ -1,45 +1,56 @@
-# CEO Pay-vs-Delivery Scorecard: interactive (S&P 500)
+# CEO Pay-vs-Delivery Scorecard: interactive S&P 500 edition
 
-An interactive front-end to *The CEO Pay-vs-Delivery Scorecard*: a reproducible, primary-sourced, descriptive audit of what the S&P 500's highest-paid CEOs took versus what they delivered.
+A frozen interactive front-end to *The CEO Pay-vs-Delivery Scorecard*, a reproducible descriptive audit of granted compensation, Compensation Actually Paid and shareholder return across a dated S&P 500 universe.
 
-**Live tool:** _(enable GitHub Pages, then paste the URL here)_
-**Canonical record (frozen, citable):** [DOI 10.5281/zenodo.21445815](https://doi.org/10.5281/zenodo.21445815)
-**Author:** NM AI Research · ORCID [0009-0003-4213-7769](https://orcid.org/0009-0003-4213-7769) · Licence CC BY 4.0
+- **Live tool:** https://nmairesearch.github.io/ceo-pay-scorecard/
+- **Canonical concept DOI:** https://doi.org/10.5281/zenodo.20680108
+- **Current v2.2 record:** https://doi.org/10.5281/zenodo.21863369
+- **Author:** NM AI Research, ORCID [0009-0003-4213-7769](https://orcid.org/0009-0003-4213-7769)
+- **Licence:** CC BY 4.0
 
-## What it does
+Parts of the text were artificially generated with AI assistance and reviewed by the author. Anthropic Opus 4.8 assisted with retrieval and drafting. OpenAI GPT-5.6 Sol checked and revised v2.2. The conflict is described below.
 
-Two views, switched at the top:
+## Coverage
 
-- **League table (494).** Toggle between granted pay (the Summary Compensation Table figure the press quotes) and realized pay (Compensation Actually Paid, the SEC measure that re-marks equity to the share price). The table reorders completely, and that reordering is the central finding (F1).
-- **Board targets (29).** For 29 hand-curated companies, the board's *own* payout-versus-target beside peer-relative delivery (F4), with a column declaring what each payout measures so a cash-bonus % and a PSU-vesting % are never conflated.
+The dated universe contains 503 constituent securities. SEC Pay Versus Performance data are populated for 498 securities, with five explicit placeholders. Dual share classes are collapsed by SEC CIK to produce 495 issuer rows. Of those issuers, 493 contain both company and peer total shareholder return.
 
-Sort any column, filter by company or CEO, and read pay beside peer-relative shareholder return.
+The audited board-target layer contains 47 cases: 29 original S&P 100 cases and 18 S&P 500 findings extensions. Every case carries primary filing metadata.
 
-The page embeds the frozen `scorecard_sp500.csv` and `curated_targets.csv` verbatim, so it never goes stale and is not "live": the canonical, citable version is the Zenodo DOI above.
+## What the tool does
+
+- Toggle granted compensation against Compensation Actually Paid.
+- Switch between the latest fiscal year and each issuer's available reporting window.
+- Sort and filter the 495-issuer view.
+- Read peer-relative shareholder return, reporting-window bounds and board-target annotations beside each issuer.
+
+The page is self-contained. Its frozen issuer data are embedded directly from `scorecard_sp500.csv`.
 
 ## Files
 
-- `index.html`: the interactive tool, self-contained (no dependencies, no server needed).
-- `scorecard_sp500.csv`: the frozen 494-company S&P 500 league-table dataset.
-- `curated_targets.csv`: the 29-company board-target layer (the hand-read S&P-100 curated names; this layer does not scale to 500 and is unchanged in v2).
-- `build.py`: regenerates `index.html` by embedding the two CSVs (pure standard library). Edit a CSV, run `python3 build.py`, commit.
+- `index.html`: the self-contained interactive tool archived with v2.2.
+- `scorecard_sp500.csv`: the 495-issuer frozen view with reporting windows and SEC accessions.
+- `board_targets.csv`: 47 primary-verified board-target cases.
+- `build.py`: validates the two CSV files and re-embeds `scorecard_sp500.csv` into `index.html`.
+- `LICENSE`: Creative Commons Attribution 4.0 International.
 
-The full reproducibility bundle, the EDGAR pull pipeline (`reproduce.py`, `assemble_sp500.py`), the 2,741-company-year spine (`pvp_pulled.csv`), and the findings, lives in the [Zenodo record](https://doi.org/10.5281/zenodo.21445815).
+## Rebuild
 
-## Method (brief)
+Run in your terminal from this repository:
 
-Built free from SEC EDGAR DEF 14A Pay-versus-Performance disclosures (Item 402(v)); 494 of the S&P 500 expose machine-readable XBRL (2,741 company-years). It is descriptive: it issues no "overpaid" verdict, sets the documented figures side by side, and leaves the conclusion to the reader.
+```sh
+python3 build.py
+```
 
-## Guardrails
+The script uses only the Python standard library. A successful rebuild reports 495 issuer rows and 47 primary-verified board-target rows.
 
-- **Attribution:** shareholder return is not caused by the CEO (macro, sector, luck, predecessor). The tool shows a co-incidence of pay and peer-relative return, not causation.
-- **CAP caveat:** Compensation Actually Paid swings with the share price; it is an accounting fair value, not cash received.
-- **Peer-group choice is the company's own** and drives the gap; a lag can mean the benchmark rose sharply.
+The full reproduction bundle, including the 2,768 populated company-year SEC spine, CEO-name backfills, universe list and `assemble_sp500.py`, is preserved in the [v2.2 Zenodo record](https://doi.org/10.5281/zenodo.21863369).
 
-## Disclosure
+## Guardrails and conflict
 
-The author holds no direct position in any company named. A workplace defined-contribution pension may hold some indirectly through pooled funds, not directed by the author. No third party reviewed, funded, or directed this work.
+- Shareholder return is not caused by the CEO. Macro conditions, sector exposure, predecessor decisions and luck also affect it.
+- Compensation Actually Paid is an accounting fair-value remeasurement, not cash received.
+- The peer benchmark is selected or disclosed by the issuer. Its composition affects the gap.
+- The board-target cases mix different cash and equity measures and are not a common cross-company metric.
+- The analysis is descriptive and does not issue an overpaid verdict.
 
-## Licence
-
-Creative Commons Attribution 4.0 International (CC BY 4.0).
+The author holds no direct position in any company named. A workplace defined-contribution pension may hold some names indirectly through pooled funds not directed by the author. No third party funded or directed the work. Anthropic and OpenAI are model providers and compete with some companies discussed or their products. Neither model provider is an issuer in this dataset. This is a potential conflict, not evidence that any result is wrong.
