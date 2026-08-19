@@ -17,6 +17,8 @@
     --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   }
   html[data-theme="light"] {
+    --fill: #1a365d;
+    --fill-fg: #f8fafc;
     --navy: #1a365d;
     --slate: #4a5568;
     --body: #2d3748;
@@ -32,6 +34,8 @@
     --shadow: 0 1px 2px rgba(26,54,93,.06);
   }
   html[data-theme="dark"] {
+    --fill: #1e293b;
+    --fill-fg: #f1f5f9;
     --navy: #ffffff;
     --slate: #94a3b8;
     --body: #f1f5f9;
@@ -63,12 +67,14 @@
     margin:22px 0 8px;padding:16px 18px;background:var(--alt);
     border:1px solid var(--line);border-radius:8px}
   .ctl label{display:block;font-size:11.5px;text-transform:uppercase;letter-spacing:.04em;
+    color:var(--slate);margin-bottom:6px}
   .ctl.hide{display:none}
   .seg{display:inline-flex;border:1px solid var(--line);border-radius:6px;overflow:hidden}
   .seg button{appearance:none;border:0;background:var(--bg-card);color:var(--body);
     padding:8px 14px;font-size:13.5px;cursor:pointer;font-family:inherit}
   .seg button+button{border-left:1px solid var(--line)}
-  .seg button.on{background:var(--navy);color:var(--bg);font-weight:bold}
+  input,select,textarea{background:var(--bg-card);color:var(--body);border:1px solid var(--line)}
+  .seg button.on{background:var(--fill);color:var(--fill-fg);font-weight:bold}
   .grow{flex:1 1 200px;min-width:180px}
   .grow input{width:100%;padding:8px 10px;font-size:14px;font-family:inherit;
     border:1px solid var(--line);background:var(--bg-card);color:var(--body);border-radius:6px}
@@ -78,7 +84,7 @@
   .spotlight b{color:var(--navy)}
 
   table{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:14px;background:var(--bg-card)}
-  thead th{position:sticky;top:0;background:var(--navy);color:var(--bg);text-align:left;
+  thead th{position:sticky;top:0;background:var(--fill);color:var(--fill-fg);text-align:left;
     padding:10px 10px;font-size:12.5px;cursor:pointer;user-select:none;white-space:nowrap}
   thead th.num{text-align:right}
   thead th .ar{opacity:.5;font-size:10px;margin-left:3px}
